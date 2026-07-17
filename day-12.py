@@ -5,12 +5,16 @@ import numpy as np
 
 env = gym.make("CartPole-v1")
 n_bins = 10
-# discretize 4D obs into bins -> state tuple
+# CartPole obs: [pos, vel, angle, ang_vel]; ranges are inf -> use manual bins
+bins = [
+    np.linspace(-2.4, 2.4, n_bins),    # cart position
+    np.linspace(-3.0, 3.0, n_bins),    # cart velocity
+    np.linspace(-0.3, 0.3, n_bins),    # pole angle
+    np.linspace(-3.0, 3.0, n_bins),    # pole ang vel
+]
+
 def discretize(obs):
-    lo, hi = env.observation_space.low, env.observation_space.high
-    hi[1], hi[3] = 3, 3  # clip velocity
-    ratio = (np.array(obs) - lo) / (hi - lo)
-    return tuple(np.clip((ratio * n_bins).astype(int), 0, n_bins - 1))
+    return tuple(int(np.digitize(obs[i], bins[i]) - 1) for i in range(4))
 
 Q = np.zeros((n_bins,) * 4 + (2,))
 lr, gamma, eps = 0.1, 0.99, 0.1
