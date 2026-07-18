@@ -23,8 +23,14 @@
   • Cron ၆ ခု monitor (daily audit, overnight study)
   • Provider monitor
       ✎ list = providers.py က source of truth (ဂဏန်း မ hardcode)
-        လက်ရှိ: nous→groq→openrouter→mistral→cohere→nvidia(+gemini)
-        nous = primary
+        chain: nous→groq→openrouter→mistral→cohere→nvidia(+gemini)
+        ─────────────────────────────────────────────
+        active (key ရှိ) : openrouter · mistral · cohere · gemini(vision) · groq(?)
+        inactive (key မရှိ): nous
+        primary လက်ရှိ : openrouter
+        ⚠️ groq key ရှိ — audit မှာ OK ဆို primary = groq ဖြစ်သင့်
+           (nous absent မို့ chain ၂ ဖိုင်မြောက် groq က ဦးဆုံး)
+        nvidia = embed/RAG (curl only) — text chain fallback မဟုတ်
 
 ───────────────────────────────────────────────────────────────
 ၃။ TRIGGER — ဘယ်အခါ (WHEN)

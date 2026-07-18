@@ -43,6 +43,14 @@
 **✅** C:/Users/user/AppData/Local/Programs/Python/Python310/python.exe သုံး
 **why:** alias က Store stub ကို ညွှန်
 
+## [2026-07-18] ROLE §2 primary provider ↔ .env key ကွဲ
+**SIG:** §2 "nous=primary" ရေး, NOUS_API_KEY .env မှာ မရှိ
+**❌** nous primary အတိုင်းထား → ကျ: runtime က ကျော်, doc လိမ်
+**❌** openrouter=primary ချက်ချင်းရေး → ကျ: groq key ရှိတာ မေ့, groq က chain ၂ ဖိုင်မြောက်
+**✅** audit run → groq status သိ → တကယ့် primary ရေး → doc = observed reality
+**guard:** ROLE မှာ provider ရေးရင် (1) .env key grep (2) audit status စစ်မှ ရေး
+**tags:** #providers #role #drift #env
+
 ---
 
 <!-- နောက် dead-end တွေ အောက်မှာ append: ❌❌✅ တစ်ခါတည်း -->
