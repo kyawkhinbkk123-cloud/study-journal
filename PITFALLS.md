@@ -93,3 +93,9 @@ tags: #providers #groq #key #resolved
 **❌** gemini-2.0-flash -> 429 quota (use gemini-flash-latest instead)
 **guard:** vision key SET != live OK. Always live-test with real image. Model name matters.
 tags: #gemini #vision #verified
+
+## [2026-07-18] Gemini 3.1 model name
+**SIG:** "3.1 lite" -> gemini-3.1-lite 404
+**✅** gemini-3.1-flash-lite vision PASS (red correct)
+**note:** gemini-flash-latest ALSO works; gemini-2.0-flash 429 quota
+**guard:** dont guess gemini model name; live-test. 3.1-lite != 3.1-flash-lite
