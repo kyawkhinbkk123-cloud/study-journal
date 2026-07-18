@@ -125,11 +125,14 @@ SYMBOLS = ["iATR", "OrderSend", "OnTick", "OnInit", "iMA", "iRSI", "iMACD",
 
 def retrieve(query: str, top_k: int = 5) -> list:
     """Hybrid: embed(semantic) U keyword(exact symbol)."""
-    # boundary: reject explicit trade-action phrases (not analysis terms)
+    # boundary: reject trade-action queries (EN + Burmese). Analysis terms OK.
     _sig = re.compile(
         r"\b(buy|sell)\s+(now|signal|order|at|when)|"
         r"\b(live|real[- ]?time)\s+(signal|price|trade)|"
-        r"execute\s+(trade|order)|entry\s+(signal|now)|exit\s+(signal|now)\b", re.I)
+        r"execute\s+(trade|order)|entry\s+(signal|now)|exit\s+(signal|now)\b|"
+        r"(အခု|ယခု)\s*(ဝယ်|ရောင်း|အောက်|အထက်|ပိတ်|ဖွင့်)|"
+        r"(ဝယ်|ရောင်း)\s*(ရမလား|လုပ်ရင်|ချက်ချင်း)|"
+        r"အမိန့်\s*(ပေး|ပို့|ဖွင့်)", re.I)
     qemb = _gem_embed(query)
     conn = sqlite3.connect(DB)
     rows = conn.execute("SELECT repo,file,text,emb FROM vectors").fetchall()
