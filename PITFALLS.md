@@ -185,3 +185,9 @@ tags: #sandbox #verify #pyflakes #runtime #pitfall
 **verify:** inbox 14 (day-46) -> run_session -> note id80 (topic+352char note, processed=1). M11 fully wired.
 **lesson:** Day 33 class — dont assume, print raw LLM before diagnosing. (i) parse-layer bug, not LLM bug.
 **tags:** #study #autopipeline #gap #resolved #pitfall
+
+## [2026-07-19] stale gaps #3/#4 RESOLVED (fact-checked)
+**#3 Forex/Coding cron provider error:** ran both (fee997c7e38a, dccb013e7670) -> execution_success=True. prior error was groq403/openrouter404 (fixed 07-18). NOT stale anymore.
+**#4 fastapi venv broken:** hermes-agent/venv python import fastapi OK (0.139.2). __audit.py references venv path (not import). Day27 pydantic_core issue -> substituted stdlib, fastapi not used in main. FALSE ALARM.
+**lesson:** stale gaps from old context (07-17) auto-resolved by later fixes. Don't carry forward without re-verify.
+**tags:** #gap #resolved #cron #fastapi #pitfall
