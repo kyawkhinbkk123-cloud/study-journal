@@ -11,7 +11,7 @@ SOUL = os.path.join(HERMES, "SOUL.md")
 
 # (source in scripts/, also copy to SOUL.md?)
 FILES = [
-    ("MAIN_ROLE.md", True),     # -> SOUL.md + journal
+    ("STUDY_ROLE.md", True),     # -> SOUL.md + journal
     ("MEMORY_MAP.md", False),
     ("MEMORY_LESSONS.md", False),
     ("PITFALLS.md", False),

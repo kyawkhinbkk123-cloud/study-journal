@@ -166,7 +166,7 @@ def note_quality():
 def sync_check():
     import hashlib
     files = [
-        ("MAIN_ROLE.md", True),
+        ("STUDY_ROLE.md", True),
         ("MEMORY_MAP.md", False),
         ("MEMORY_LESSONS.md", False),
         ("PITFALLS.md", False),
