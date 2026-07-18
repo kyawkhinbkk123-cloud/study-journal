@@ -62,19 +62,19 @@
 **guard:** provider chain ထဲ key SET ဆိုတာ OK မဟုတ် — audit live status ကို source of truth ထား
 tags: #providers #groq #audit
 
-## [2026-07-18] study bot 409 Conflict (external, NOT code)
-**SIG:** telegram_bot.py fix (TELEGRAM_BOT_TOKEN) ပြီးသော်လည်း 409 Conflict ပြန်၊ bot stop
-**❌** code fix မှန် (TELEGRAM_BOT_TOKEN != gateway TELEGRAM_TOKEN) ဒါပေမယ့် 409 မပျောက်
-**❌** cron jobs grep → study.py/forex/daily (bot ကို cron မစတဘူး)
-**✅** root = EXTERNAL: @kkk4study_bot (824051) ကို တခြား instance poll လုပ်နေ (cloud/hermes profile/botfather double-reg/webhook)
-**why:** code မှန်ပေမယ့် token ကို နှစ်ခု ပြိုင် poll → 409 (Telegram 1 bot=1 poll only)
-**guard:** 409 = external conflict, code fix နဲ့ မပျောက်။ Kyaw က cloud/account စစ်ရမယ်။
-tags: #telegram #409 #external #studybot
+## SIG: study bot HTTP 409 Conflict — polling same bot
+**component:** telegram_bot.py / .env
+**symptom:** [study_bot] 409 Conflict, another process polling same token
 
-## [2026-07-18] 409 FIXED: TELEGRAM_BOT_TOKEN was gateway bot
-**SIG:** study bot 409 even after TELEGRAM_BOT_TOKEN code fix
-**❌** code fix မှန် (TELEGRAM_BOT_TOKEN read) ဒါပေမယ့် .env ထဲ token = @kyawkk3_bot (gateway)
-**✅** verify: getMe on TELEGRAM_BOT_TOKEN -> kyawkk3_bot (NOT kkk4study_bot)
-**✅** replaced TELEGRAM_BOT_TOKEN = real @kkk4study_bot (8090957427) -> 409 gone, stable 40s+
-**guard:** 409 = 2 procs polling SAME bot. Verify BOTH tokens via getMe -> different usernames.
-tags: #telegram #409 #env #resolved
+**❌** စမ်း: TELEGRAM_TOKEN → TELEGRAM_BOT_TOKEN ဖတ်အောင် code ပြင်
+     → ကျ: var မှန်ပေမဲ့ 409 ဆက်ဖြစ် (value က မှား, var မဟုတ်)
+**❌** စမ်း: external ကောက် (webhook/cloud/BotFather double-register)
+     → ကျ: external မဟုတ်, အချိန်ကုန်
+**✅** ဖြစ်: .env ထဲ TELEGRAM_BOT_TOKEN value = token မှားနေတာ
+     တွေ့ → @kkk4study_bot token မှန် ထည့် → ၂ bot ကွဲ, 409 ပျောက်
+     → ဘာလို့: token VALUE ၂ ခု တူ → တူတဲ့ bot ကို ၂ ခု poll
+
+**guard:** 409 တွေ့ရင် external မ ကောက်ခင် — getMe နဲ့ token ၂ ခုရဲ့ bot id/username တူမတူ အရင် စစ် (var name မှန်ရုံ မ လုံလောက်, value စစ်)
+**tags:** #telegram #409 #env #token #misdiagnosis
+
+---
