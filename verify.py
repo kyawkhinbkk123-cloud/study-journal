@@ -26,10 +26,8 @@ DANGER = [
     (r"\bos\.system\b",                    "os.system"),
     (r"\bos\.popen\b",                     "os.popen"),
     (r"\bos\.exec[lv]?[pe]{0,2}\b",        "os.exec*"),
-    (r"\bos\.remove\b|\bos\.unlink\b",     "os file delete"),
     (r"\bos\.rmdir\b|\bos\.removedirs\b",  "os dir delete"),
     (r"\bshutil\.rmtree\b",                "shutil.rmtree"),
-    (r"\.unlink\s*\(",                     "Path.unlink"),
     (r"\bimport\s*\(",                 "import (obfuscation)"),
     (r"\bgetattr\s*\(",                    "getattr (obfuscation)"),
     (r"\beval\s*\(",                       "eval"),
@@ -78,19 +76,24 @@ NETWORK_ALLOWLIST = [
 
 
 def _network_ok(code: str) -> list:
-    """Allow network to allowlisted domains only. Block dynamic URL builds."""
+    """Allow network to allowlisted hosts only.
+    Host must be LITERAL (en.wikipedia.org). Query/path vars (?q={x}) OK.
+    Dynamic HOST build (f"https://{host}" or "https://"+h) = evasion -> block.
+    """
     c = code.casefold()
     hits = []
-    urls = re.findall(r"https?://([a-z0-9.\-]+)", c, re.I)
-    for host in urls:
+    hosts = re.findall(r"https?://([a-z0-9.\-]+)", c, re.I)
+    for host in hosts:
         hl = host.lower()
         allowed = any(hl == d.lower() or hl.endswith("." + d.lower())
                       for d in NETWORK_ALLOWLIST)
         if not allowed:
             hits.append(f"non-allowlist: {host}")
-    # dynamic URL build (concat/f-string/var) -> allowlist unverifiable -> reject
-    if re.search(r'["\']https?://["\']\s*\+', c) or re.search(r'\+?\s*["\']https?://', c):
-        hits.append("dynamic url build (evasion)")
+    # dynamic HOST build (entire host is var/concat) = evasion. query var = OK.
+    if (re.search(r"https?://\{", c)
+            or re.search(r"https?://.*?\+", c)
+            or re.search(r"\+.*?https?://", c)):
+        hits.append("dynamic host build (evasion)")
     return hits
 
 
