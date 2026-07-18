@@ -149,3 +149,10 @@ tags: #sandbox #verify #runtime #pitfall
 **✅** verify.py _pyflakes_check added: catches "undefined name: y" (Day33 pattern confirmed)
 **guard:** sandbox = BLOCKED_MODULES + py_compile + pyflakes lint. py_compile single != safe.
 tags: #sandbox #verify #pyflakes #runtime #pitfall
+
+## [2026-07-19] tool ထဲ eval() = sandbox risk
+**SIG:** day-36 tool_calc eval(expr) -> verify.py block (providers/eval)
+**❌** eval() = arbitrary code exec, agent tool ထဲ မသုံးရ
+**✅** safe parser (re.fullmatch numeric only) သုံး, ဒါမှမဟုတ် ast.literal_eval
+**guard:** agent tool ရေးတိုင်း eval/exec မ ပါအောင် scan
+**tags:** #agent #sandbox #eval #pitfall
