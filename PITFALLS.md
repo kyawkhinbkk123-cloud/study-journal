@@ -202,3 +202,10 @@ tags: #sandbox #verify #pyflakes #runtime #pitfall
 **root:** old context carry-forward -> "gap" ထင်, code/state re-verify မ လုပ်။
 **rule:** gap claim မလုပ်ခင် (1) grep code (2) run/ps/sqlite check -> confirm မှ claim။ Day33 lesson ပဲ (print raw before diagnose)။
 **tags:** #meta #false-alarm #verify #pitfall
+
+## [2026-07-19] META-LESSON: quantified != correct (criteria validate)
+**pattern:** Day 50 trivial-skip = MEASURED 1756->1159 (<1500 OK) -> confident. But criteria WRONG: <4 stmt dropped OnTick/OnTrade (core, short fn).
+Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) -> 1756->1484, core kept.
+**root:** metric right, criteria wrong. "trivial" defined by statement-count (proxy) not by function-role.
+**rule:** measurement != correctness. After measuring, VALIDATE criteria: sample the excluded set (skip/drop) -> confirm truly trivial. Quantify then verify exclusion.
+**tags:** #meta #false-alarm #verify #pitfall #quantify
