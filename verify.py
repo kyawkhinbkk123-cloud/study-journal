@@ -100,18 +100,22 @@ def scan(code: str) -> list[str]:
         if not path_safe(m.group(1)):
             hits.append(f"blocked path: {m.group(1)[:60]}")
 
-    # static lint: catch undefined names (py_compile misses these at runtime)
+    # static lint: pyflakes (pip, system-installed) catches undefined names
+    # py_compile misses runtime NameError (e.g. y undefined in genexpr scope)
     _pyflakes_check(code, hits)
 
     return sorted(set(hits))
 
 
 def _pyflakes_check(code: str, hits: list[str]) -> None:
-    """Undefined-name / unused / syntax that py_compile misses."""
+    """Undefined-name / unused detection via pyflakes.
+    pyflakes is a SYSTEM dependency (pip-installed in Python310), NOT imported
+    into study sandbox code — stdlib-only rule applies to study code, not tools.
+    Graceful skip if missing (don't block verify on absent dep)."""
     try:
         import pyflakes.api, pyflakes.reporter
     except Exception:
-        return  # pyflakes not installed -> skip (don't block on missing dep)
+        return
     import io
     out = io.StringIO()
     reporter = pyflakes.reporter.Reporter(out, out)
