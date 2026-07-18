@@ -78,3 +78,10 @@ tags: #providers #groq #audit
 **tags:** #telegram #409 #env #token #misdiagnosis
 
 ---
+## [2026-07-18] Groq 403 -> fixed (key value error, not dead)
+**SIG:** audit=403 bad key, format gsk_ but invalid
+**❌** "dead" လို့ ထား → မှား, key value မှား (telegram token pattern)
+**✅** Kyaw console မဖွင့်နိုင် -> new key ပေး -> live curl test PASS -> .env update
+**✅** primary = groq (llama-3.3-70b, fastest) -> openrouter 429 load relief
+**guard:** 403/401 = key VALUE error, fixable. Dont mark dead. Verify with live curl before conclusion.
+tags: #providers #groq #key #resolved
