@@ -191,3 +191,14 @@ tags: #sandbox #verify #pyflakes #runtime #pitfall
 **#4 fastapi venv broken:** hermes-agent/venv python import fastapi OK (0.139.2). __audit.py references venv path (not import). Day27 pydantic_core issue -> substituted stdlib, fastapi not used in main. FALSE ALARM.
 **lesson:** stale gaps from old context (07-17) auto-resolved by later fixes. Don't carry forward without re-verify.
 **tags:** #gap #resolved #cron #fastapi #pitfall
+
+## [2026-07-19] META-LESSON: gap စွပ်ခင် re-verify (false-alarm ၄ ခု pattern)
+**pattern:** session ဒီတစ်ခုလုံး false-alarm ၄ ခု:
+  1. gap#1 checkpoint (study.py processed flag ရှိပြီး -> false alarm)
+  2. gap#2 pyflakes (verify_code ထဲ ရှိပြီး -> false alarm)
+  3. stale#3 cron provider error (07-18 fix နောက် auto-resolved -> false alarm)
+  4. stale#4 fastapi venv (import OK -> false alarm)
+**real gap:** ၂ ခု ပဲ (argv secret, network tension)။
+**root:** old context carry-forward -> "gap" ထင်, code/state re-verify မ လုပ်။
+**rule:** gap claim မလုပ်ခင် (1) grep code (2) run/ps/sqlite check -> confirm မှ claim။ Day33 lesson ပဲ (print raw before diagnose)။
+**tags:** #meta #false-alarm #verify #pitfall
