@@ -161,3 +161,12 @@ tags: #sandbox #verify #pyflakes #runtime #pitfall
 **SIG:** providers._post argv ထဲ Bearer key -> tasklist/Process Explorer မြင် -> -K config file
 **✅** fix: temp .curl config (header=), 0600, finally unlink, curl -K
 **⚠️ Windows os.chmod(0o600) = no-op (POSIX perm မ honor) -> real guard = user 
+## [2026-07-19] sandbox network-block vs embed/agent study (core tension)
+**SIG:** verify.py danger-scan blocks subprocess/tempfile -> day-44 (curl embed) BLOCKED in auto-pipeline (study.py inbox), only manual-run works.
+**root:** network embed/agent study needs curl, but sandbox blocks network -> blind spot: real embed code never auto-runs.
+**options (pre-Day46):**
+  (a) network whitelist (provider domain only) -> sandbox 2-tier
+  (b) embed/agent code = manual review, sandbox skip
+  (c) accept embed study = manual-run only, not in auto-pipeline
+**guard:** Day 46 (research agent) needs web = tension returns. Decide (a/b/c) before Day 46. verify.py edit = main system = approval.
+**tags:** #verify #sandbox #network #tension #pitfall
