@@ -107,15 +107,23 @@ def scan(code: str) -> list[str]:
     return sorted(set(hits))
 
 
+# layer-3 status (pyflakes present in this env). Audit reads this.
+LINT_LAYER3_ACTIVE = None  # None=unchecked, True/False after first scan
+
+
 def _pyflakes_check(code: str, hits: list[str]) -> None:
     """Undefined-name / unused detection via pyflakes.
     pyflakes is a SYSTEM dependency (pip-installed in Python310), NOT imported
     into study sandbox code — stdlib-only rule applies to study code, not tools.
-    Graceful skip if missing (don't block verify on absent dep)."""
+    If absent -> flag LINT_LAYER3_ACTIVE=False (audit must warn, NOT silent skip)."""
+    global LINT_LAYER3_ACTIVE
     try:
         import pyflakes.api, pyflakes.reporter
     except Exception:
+        LINT_LAYER3_ACTIVE = False
+        hits.append("WARN: pyflakes absent - layer-3 (undefined-name) OFF")
         return
+    LINT_LAYER3_ACTIVE = True
     import io
     out = io.StringIO()
     reporter = pyflakes.reporter.Reporter(out, out)

@@ -213,6 +213,16 @@ def main():
     print(f"  Notes:        {note_quality()}")
     print(f"  Cron:         {cron_state()}")
     print(f"  Role sync:    {sync_check()}")
+    # layer-3 (pyflakes) status — silent skip guard
+    try:
+        import verify
+        # trigger one scan to set LINT_LAYER3_ACTIVE
+        verify.scan("# comment only\nx = 1")
+        l3 = verify.LINT_LAYER3_ACTIVE
+        l3s = "✅ ON (undefined-name catch)" if l3 else "⚠️ OFF (pyflakes absent — NameError လွတ်နို)"
+    except Exception as e:
+        l3s = f"✗ check err: {e}"
+    print(f"  sandbox L3:   {l3s}")
     print()
     print("【 LLM IMPROVEMENT 】")
     try:
