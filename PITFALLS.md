@@ -114,3 +114,10 @@ tags: #gemini #vision #verified
 **✅** test: processed=0 reset -> study.py -> note PASS (real flow works)
 **guard:** bug မစွပ်စွဲခင် -> INSERT default + ဘယ် run က process လုပ်လဲ trace လုပ်
 **tags:** #studybot #inbox #false-alarm #verified
+
+## [2026-07-18] Windows Python urllib -> groq 401/403 (use curl)
+**SIG:** providers._post urllib -> groq 403/401, but curl subprocess PASS (same key)
+**❌** urllib.request on Windows fails groq TLS/header (401 even with UA+Accept)
+**✅** _post -> curl subprocess -> groq OK (primary works)
+**guard:** Windows provider HTTP = use curl subprocess, not urllib. urllib unreliable for groq.
+**tags:** #providers #groq #windows #urllib #curl

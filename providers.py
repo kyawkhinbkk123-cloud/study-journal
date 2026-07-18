@@ -170,13 +170,28 @@ def status() -> list[dict]:
 
 # ------------------------------------------------------------------- http
 def _post(url: str, payload: dict, headers: dict) -> dict:
-    body = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(url, data=body, method="POST")
-    req.add_header("Content-Type", "application/json")
+    """POST via curl subprocess (Windows Python urllib fails on groq: 401/403)."""
+    import subprocess
+    cmd = ["curl", "-s", "--max-time", str(TIMEOUT), "-X", "POST", url,
+           "-H", "Content-Type: application/json"]
     for k, v in headers.items():
-        req.add_header(k, v)
-    with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
-        return json.loads(r.read().decode("utf-8"))
+        cmd += ["-H", f"{k}: {v}"]
+    cmd += ["-d", json.dumps(payload)]
+    try:
+        out = subprocess.run(cmd, capture_output=True, text=True, timeout=TIMEOUT + 5)
+    except subprocess.TimeoutExpired:
+        raise RuntimeError(f"timeout calling {url}")
+    if out.returncode != 0:
+        raise RuntimeError(f"curl error {out.returncode}: {out.stderr[:120]}")
+    body = out.stdout
+    # groq returns HTTP errors as JSON with error field, but curl exit 0
+    if not body.strip():
+        raise RuntimeError(f"empty response from {url}")
+    try:
+        return json.loads(body)
+    except json.JSONDecodeError:
+        # surface HTTP error text (e.g. groq 401 in body)
+        raise RuntimeError(f"non-JSON response: {body[:200]}")
 
 
 # --------------------------------------------------------- payload shapes
