@@ -128,3 +128,10 @@ tags: #gemini #vision #verified
 **✅** BLOCKED_MODULES added: providers/telegram_bot/study/verify/sync_role/__audit/config
 **guard:** study sandbox must block infra module imports, not just subprocess keyword
 **tags:** #sandbox #verify #security #tunnel
+
+## [2026-07-18] code_study shallow-note blind spot (source-count)
+**SIG:** overnight 6/6 pass, but #1/#5 README-only repo -> shallow note, garbage-check pass
+**❌** _is_garbage binary (len/repetitive/chunk) -> "shallow but well-formed" မ ဖမ်း
+**✅** fix later: code_study list_sources len<2 -> "shallow" flag; audit note-quality tier (rich/ok/shallow)
+**guard:** format-ok != content-rich. README-only repo = shallow by definition. Count sources.
+tags: #code_study #quality #blindspot #shallow
