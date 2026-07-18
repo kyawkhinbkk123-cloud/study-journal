@@ -29,7 +29,8 @@
         inactive (key မရှိ): nous
         primary လက်ရှိ : groq (key fixed 2026-07-18, llama-3.3-70b, fastest)
         buffer         : openrouter(429 risk) · mistral · cohere
-        nvidia = embed/RAG (curl only) — text chain fallback မဟုတ်
+        vision:    gemini-3.1-flash-lite (verified 2026-07-18) · openrouter
+        embed:     nvidia (curl only) — text chain fallback မဟုတ်
 
 ───────────────────────────────────────────────────────────────
 ၃။ TRIGGER — ဘယ်အခါ (WHEN)
