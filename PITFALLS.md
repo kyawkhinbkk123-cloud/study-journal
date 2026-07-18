@@ -177,3 +177,12 @@ tags: #sandbox #verify #pyflakes #runtime #pitfall
 **rule:** host MUST be literal+allowlist. query/path (?q={x}) = OK. full-host var (f"https://{h}") = BLOCK.
 **partial:** static scan က runtime redirect / DNS-rebind မ ဖမ်း. real fix = OS network restrict (proxy/firewall) - solo laptop မှာ overkill. study code=self-authored (low threat) -> (A) လုံလောက်.
 **tags:** #verify #sandbox #network #resolved #pitfall
+
+## [2026-07-19] gap #1 PARTIAL: day-44/46 auto-run OK but note empty
+**verify:** inbox 13 (day-46) -> run_session -> processed=1, note id79 saved. NOT blocked.
+**but:** note topic='' note='' verify='reasoned' -> LLM study_code path က network code ကို topic/note မ ထုတ်.
+**root:** study_code() = LLM summarize, day-46 က production script (not tutorial) -> LLM 'topic မရှိ' ပြန်.
+**gap:** demo(run PASS) != auto-pipeline(empty note) = Day 32 lesson ပြန်ချို�.
+**fix (main system, approval):** study_code က file comment '# TOPIC:' ဖတ် OR day-N filename ကနေ topic extract.
+**verdict:** auto-run works (not blocked), but quality gap -> M11 not fully 'wired' until fix.
+**tags:** #study #autopipeline #gap #pitfall
