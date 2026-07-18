@@ -194,6 +194,28 @@ def _post(url: str, payload: dict, headers: dict) -> dict:
         raise RuntimeError(f"non-JSON response: {body[:200]}")
 
 
+# --------------------------------------------------------------- embeddings
+def embed(text: str, model: str = "nvidia/nemotron-3-embed-1b") -> list[float]:
+    """NVIDIA NIM embedding API. Returns 2048-dim vector. curl-only (urllib 500)."""
+    import os
+    key = os.environ.get("NVIDIA_API_KEY", "").strip()
+    if not key:
+        raise RuntimeError("NVIDIA_API_KEY missing")
+    url = "https://integrate.api.nvidia.com/v1/embeddings"
+    payload = {
+        "input": text,
+        "model": model,
+        "input_type": "passage",
+        "encoding_format": "float",
+    }
+    headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
+    data = _post(url, payload, headers)
+    try:
+        return data["data"][0]["embedding"]
+    except (KeyError, IndexError, TypeError) as e:
+        raise RuntimeError(f"embed response malformed: {e} | {str(data)[:120]}")
+
+
 # --------------------------------------------------------- payload shapes
 def _openai_payload(p, messages, system, json_mode, image_b64, image_mime,
                     max_tokens, temperature) -> dict:
