@@ -392,6 +392,8 @@ def chat_json(messages, **kw) -> dict:
         out = _parse_markdown_note(raw)
     if not isinstance(out, dict):
         raise ProviderError(f"not JSON from {res['provider']}: {raw[:120]}")
+    # normalize keys to lowercase (LLM may return 'Topic' or 'topic')
+    out = {str(k).lower(): v for k, v in out.items()}
     out["_provider"] = res["provider"]
     return out
 
@@ -410,6 +412,15 @@ def _parse_markdown_note(text: str) -> dict:
     out: dict = {}
     cur = None
     note_lines: list[str] = []
+    # (1) Python dict literal (LLM returns {'Topic':...} not JSON) -> ast.literal_eval
+    import ast
+    try:
+        d = ast.literal_eval(text)
+        if isinstance(d, dict):
+            return {str(k).lower(): v for k, v in d.items()}
+    except Exception:
+        pass
+    # (2) markdown **Topic:** style
     for line in text.splitlines():
         line = line.strip()
         if not line:
