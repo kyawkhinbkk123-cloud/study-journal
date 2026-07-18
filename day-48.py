@@ -53,22 +53,49 @@ def _stmt_count(chunk: str) -> int:
     return len(re.findall(r"[;{]", chunk))
 
 
+# core EA entry points + risk functions must NEVER skip (even if short)
+_CORE_NAMES = {"OnTick", "OnInit", "OnDeinit", "OnTrade", "OnTradeTransaction",
+               "OnTimer", "OnChartEvent", "OnTester", "OnStart"}
+
+
+def _is_trivial(chunk: str) -> bool:
+    """True = safe to skip (getter/setter/trivial, no EA logic).
+    False = keep (core entry / risk / control-flow present)."""
+    # core entry points always keep
+    fn = re.match(r"\s*(?:[\w\[\]]+\s+)+(\w+)\s*\(", chunk)
+    if fn and fn.group(1) in _CORE_NAMES:
+        return False
+    # keep if any risk/control keyword present
+    if re.search(r"\b(OrderSend|OrderClose|iATR|iMA|iRSI|iMACD|if\s*\(|for\s*\(|while\s*\(|"
+                 r"SL|TP|risk|lot|position|trade)\b", chunk, re.I):
+        return False
+    # skip if <4 statements AND looks like getter/setter (getX/setX or single return)
+    stmts = _stmt_count(chunk)
+    if stmts < 4:
+        if re.search(r"\b(get|set)[A-Z]\w*\s*\(", chunk) or \
+           re.search(r"return\s+\w+\s*;", chunk.strip()):
+            return True
+        # bare one-liner with no logic -> skip
+        if stmts <= 1:
+            return True
+    return False
+
+
 def _chunk_functions(src: str):
-    """Function-level chunk + trivial-skip (Day 50 quota fix).
-    Skip <4 statements (getter/setter/trivial): 1756 -> 1159."""
+    """Function-level chunk + trivial-skip (Day 50/51: keep core EA logic)."""
     pat = re.compile(r"^\s*(?:[\w\[\]]+\s+)+(\w+)\s*\([^)]*\)\s*\{", re.M)
     lines = src.splitlines()
     starts = [m.start() for m in pat.finditer(src)]
     if not starts:
         for i in range(0, len(lines), 40):
             c = "\n".join(lines[i:i + 40])
-            if c.strip() and _stmt_count(c) >= 4:
+            if c.strip() and not _is_trivial(c):
                 yield c
         return
     starts.append(len(src))
     for i in range(len(starts) - 1):
         body = src[starts[i]:starts[i + 1]]
-        if body.strip() and _stmt_count(body) >= 4:
+        if body.strip() and not _is_trivial(body):
             yield body
 
 
