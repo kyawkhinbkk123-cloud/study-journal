@@ -30,6 +30,7 @@ if _env.exists():
         os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 import providers
+from repo_sources import select_sources, repo_tier, is_code
 
 GITHUB_API = "https://api.github.com"
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
@@ -136,9 +137,11 @@ def study_repo(repo: str) -> None:
     if not files:
         print("  (no source files)")
         return
-    print(f"  files: {len(files)}")
+    tier = repo_tier(files)
+    picked = select_sources(files)
+    print(f"  files: {len(files)} | tier: {tier} | picked: {len(picked)}")
     parts = []
-    for f in files[:6]:
+    for f in picked:
         code = read_file(repo, f)
         logic = extract_pattern(code, f)
         if logic:
@@ -159,10 +162,14 @@ def study_repo(repo: str) -> None:
                 print(f"  [!] attempt {attempt+1}: garbage, retry")
                 last_err = "garbage"
                 continue
+            if tier == "shallow":
+                text = "⚠️ shallow (code source<2) — " + text
             print(text)
             print(f"\n(provider: {res['provider']})")
             save_note(repo, {"note": text, "provider": res["provider"],
-                             "quality": "ok", "files": files[:6],
+                             "quality": "ok", "tier": tier,
+                             "source_count": len([f for f in picked if is_code(f)]),
+                             "files": files[:6],
                              "ts": time.strftime("%Y-%m-%d %H:%M")})
             return
         except providers.ProviderError as e:
@@ -170,6 +177,7 @@ def study_repo(repo: str) -> None:
             print(f"  [!] LLM err: {e}")
             time.sleep(3)
     save_note(repo, {"note": "", "provider": "none", "quality": "garbage",
+                     "tier": tier,
                      "error": last_err, "files": files[:6],
                      "ts": time.strftime("%Y-%m-%d %H:%M")})
     print(f"  [x] FAILED ({last_err}) -> flagged garbage")
