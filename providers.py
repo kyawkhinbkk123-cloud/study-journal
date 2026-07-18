@@ -170,15 +170,29 @@ def status() -> list[dict]:
 
 # ------------------------------------------------------------------- http
 def _post(url: str, payload: dict, headers: dict) -> dict:
-    """POST via curl subprocess (Windows Python urllib fails on groq: 401/403)."""
-    import subprocess
-    cmd = ["curl", "-s", "--max-time", str(TIMEOUT), "-X", "POST", url,
-           "-H", "Content-Type: application/json"]
-    for k, v in headers.items():
-        cmd += ["-H", f"{k}: {v}"]
-    cmd += ["-d", json.dumps(payload)]
+    """POST via curl subprocess (Windows Python urllib fails on groq: 401/403).
+    Headers written to 0600 temp config (-K) — secret never in argv."""
+    import subprocess, tempfile, os
+    cfg = None
     try:
-        out = subprocess.run(cmd, capture_output=True, text=True, timeout=TIMEOUT + 5)
+        cfg = tempfile.NamedTemporaryFile(mode="w", suffix=".curl", delete=False)
+        os.chmod(cfg.name, 0o600)  # no-op on Windows, POSIX fallback
+        for k, v in headers.items():
+            cfg.write(f'header = "{k}: {v}"\n')
+        cfg.write(f'url = "{url}"\n')
+        cfg.close()
+        cmd = ["curl", "-s", "--max-time", str(TIMEOUT), "-X", "POST",
+               "-K", cfg.name, "-H", "Content-Type: application/json",
+               "-d", json.dumps(payload)]
+        try:
+            out = subprocess.run(cmd, capture_output=True, text=True,
+                                  timeout=TIMEOUT + 5)
+        finally:
+            if cfg is not None and os.path.exists(cfg.name):
+                try:
+                    os.unlink(cfg.name)
+                except OSError:
+                    pass
     except subprocess.TimeoutExpired:
         raise RuntimeError(f"timeout calling {url}")
     if out.returncode != 0:
