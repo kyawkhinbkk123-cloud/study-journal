@@ -85,3 +85,11 @@ tags: #providers #groq #audit
 **✅** primary = groq (llama-3.3-70b, fastest) -> openrouter 429 load relief
 **guard:** 403/401 = key VALUE error, fixable. Dont mark dead. Verify with live curl before conclusion.
 tags: #providers #groq #key #resolved
+
+## [2026-07-18] Gemini vision LIVE test PASS (model name gotcha)
+**SIG:** offline audit cant test vision; key SET but unverified
+**✅** live call image -> gemini-flash-latest -> "red" correct
+**❌** gemini-1.5-flash -> 404 (not in v1beta)
+**❌** gemini-2.0-flash -> 429 quota (use gemini-flash-latest instead)
+**guard:** vision key SET != live OK. Always live-test with real image. Model name matters.
+tags: #gemini #vision #verified
