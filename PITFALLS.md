@@ -142,3 +142,10 @@ tags: #code_study #quality #blindspot #shallow
 **✅** fix: study code run မစခင် py_compile လုပ် (Day 34 ကစလုပ်)
 **guard:** sandbox pass != run pass. Always py_compile before execute.
 tags: #sandbox #verify #runtime #pitfall
+
+## [2026-07-18] py_compile != NameError catch (REVISED)
+**SIG:** Day34 "py_compile before run" = incomplete. py_compile=syntax only, NameError=runtime.
+**❌** py_compile alone က undefined name (y not defined) မ ဖမ်း -> Day33 bug ပြန်ဖြစ်နိုင်
+**✅** verify.py _pyflakes_check added: catches "undefined name: y" (Day33 pattern confirmed)
+**guard:** sandbox = BLOCKED_MODULES + py_compile + pyflakes lint. py_compile single != safe.
+tags: #sandbox #verify #pyflakes #runtime #pitfall

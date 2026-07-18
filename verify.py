@@ -100,7 +100,33 @@ def scan(code: str) -> list[str]:
         if not path_safe(m.group(1)):
             hits.append(f"blocked path: {m.group(1)[:60]}")
 
+    # static lint: catch undefined names (py_compile misses these at runtime)
+    _pyflakes_check(code, hits)
+
     return sorted(set(hits))
+
+
+def _pyflakes_check(code: str, hits: list[str]) -> None:
+    """Undefined-name / unused / syntax that py_compile misses."""
+    try:
+        import pyflakes.api, pyflakes.reporter
+    except Exception:
+        return  # pyflakes not installed -> skip (don't block on missing dep)
+    import io
+    out = io.StringIO()
+    reporter = pyflakes.reporter.Reporter(out, out)
+    try:
+        pyflakes.api.check(code, filename="<study>", reporter=reporter)
+    except Exception as e:
+        hits.append(f"lint error: {e}")
+        return
+    for line in out.getvalue().splitlines():
+        if "undefined name" in line:
+            name = line.rsplit("'", 2)[1] if "'" in line else "?"
+            hits.append(f"undefined name: {name}")
+        elif "imported but unused" in line:
+            hits.append("unused import")
+
 
 
 def path_safe(path: str) -> bool:
