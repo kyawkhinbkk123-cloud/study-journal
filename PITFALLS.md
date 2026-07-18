@@ -61,3 +61,12 @@
 **✅** audit status ကို final ယူ → "dead (key bad): groq" ရေး
 **guard:** provider chain ထဲ key SET ဆိုတာ OK မဟုတ် — audit live status ကို source of truth ထား
 tags: #providers #groq #audit
+
+## [2026-07-18] study bot 409 Conflict (external, NOT code)
+**SIG:** telegram_bot.py fix (TELEGRAM_BOT_TOKEN) ပြီးသော်လည်း 409 Conflict ပြန်၊ bot stop
+**❌** code fix မှန် (TELEGRAM_BOT_TOKEN != gateway TELEGRAM_TOKEN) ဒါပေမယ့် 409 မပျောက်
+**❌** cron jobs grep → study.py/forex/daily (bot ကို cron မစတဘူး)
+**✅** root = EXTERNAL: @kkk4study_bot (824051) ကို တခြား instance poll လုပ်နေ (cloud/hermes profile/botfather double-reg/webhook)
+**why:** code မှန်ပေမယ့် token ကို နှစ်ခု ပြိုင် poll → 409 (Telegram 1 bot=1 poll only)
+**guard:** 409 = external conflict, code fix နဲ့ မပျောက်။ Kyaw က cloud/account စစ်ရမယ်။
+tags: #telegram #409 #external #studybot
