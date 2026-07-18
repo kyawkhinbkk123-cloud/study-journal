@@ -106,3 +106,11 @@ tags: #gemini #vision #verified
 **✅** test: processed=0 reset -> study.py run -> note PASS (gemini vision ok)
 **guard:** inbox push = processed=0 သာ။ processed=1 ကို study.py run မှ ထား
 **tags:** #studybot #inbox #bug #vision
+
+## [2026-07-18] study inbox flow = CORRECT (false alarm resolved)
+**SIG:** image id8 processed=1 -> study.py WHERE processed=0 မယူ
+**❌** ထင်တာ: telegram_bot push က processed=1 ထား (BUG)
+**✅** တကယ်: schema DEFAULT 0, push 0 ထား။ id8=1 က အရင် run_session က process လုပ်ပြီး
+**✅** test: processed=0 reset -> study.py -> note PASS (real flow works)
+**guard:** bug မစွပ်စွဲခင် -> INSERT default + ဘယ် run က process လုပ်လဲ trace လုပ်
+**tags:** #studybot #inbox #false-alarm #verified
