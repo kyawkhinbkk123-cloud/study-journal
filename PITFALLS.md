@@ -156,3 +156,8 @@ tags: #sandbox #verify #pyflakes #runtime #pitfall
 **✅** safe parser (re.fullmatch numeric only) သုံး, ဒါမှမဟုတ် ast.literal_eval
 **guard:** agent tool ရေးတိုင်း eval/exec မ ပါအောင် scan
 **tags:** #agent #sandbox #eval #pitfall
+
+## [2026-07-19] curl -K secret hygiene; Windows chmod no-op
+**SIG:** providers._post argv ထဲ Bearer key -> tasklist/Process Explorer မြင် -> -K config file
+**✅** fix: temp .curl config (header=), 0600, finally unlink, curl -K
+**⚠️ Windows os.chmod(0o600) = no-op (POSIX perm မ honor) -> real guard = user 
