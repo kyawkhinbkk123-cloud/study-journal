@@ -99,3 +99,10 @@ tags: #gemini #vision #verified
 **✅** gemini-3.1-flash-lite vision PASS (red correct)
 **note:** gemini-flash-latest ALSO works; gemini-2.0-flash 429 quota
 **guard:** dont guess gemini model name; live-test. 3.1-lite != 3.1-flash-lite
+
+## [2026-07-18] study bot push sets processed=1 (BUG)
+**SIG:** image ပို့ -> study_inbox id8 processed=1 -> study.py WHERE processed=0 က မယူ
+**❌** telegram_bot.py push() မှာ processed=1 ထား -> study.py မဖတ်နိုင်
+**✅** test: processed=0 reset -> study.py run -> note PASS (gemini vision ok)
+**guard:** inbox push = processed=0 သာ။ processed=1 ကို study.py run မှ ထား
+**tags:** #studybot #inbox #bug #vision
