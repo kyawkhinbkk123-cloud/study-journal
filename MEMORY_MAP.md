@@ -30,9 +30,10 @@ C:/Users/user/AppData/Local/hermes/
 │   │      ✎ ❌ ဘယ်တော့မှ မဖျက် — dead end က feature
 │   │      ✎ ဖြေရှင်းပြီးမှ trail အပြည့် (❌❌✅) တစ်ခါတည်း append
 │   │
-│   ├─ [ROLE] STUDY_ROLE.md ... study.py က ဖတ် (config.yaml ထဲ မထည့်)
-│   │      • Hermes study assistant system prompt
-│   │      • recap_line = self-contained (recap 0 API)
+│   ├─ [ROLE] MAIN_ROLE.md .... master copy (v2, section ၈) + SOUL.md auto-load
+│   │      • session start: framework loads SOUL.md (= MAIN_ROLE.md content)
+│   │      • study.py recap_line = self-contained (recap 0 API)
+│   │      • sync: MAIN_ROLE.md edit → copy to SOUL.md (drift guard)
 │   │
 │   └─ providers.py ........... .env ← source of truth
 │          nous→groq→openrouter→mistral→cohere→nvidia(+gemini)
