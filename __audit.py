@@ -165,23 +165,28 @@ def note_quality():
 
 def sync_check():
     import hashlib
-    src = DIR / "MAIN_ROLE.md"
-    soul = pathlib.Path(r"C:\Users\user\AppData\Local\hermes\SOUL.md")
-    jour = DIR / "study_journal" / "MAIN_ROLE.md"
-
+    files = [
+        ("MAIN_ROLE.md", True),
+        ("MEMORY_MAP.md", False),
+        ("MEMORY_LESSONS.md", False),
+        ("PITFALLS.md", False),
+    ]
     def h(p):
         return hashlib.sha256(open(p, "rb").read()).hexdigest() if p.exists() else None
-    src_h = h(src)
-    if src_h is None:
-        return "⚠️ MAIN_ROLE.md မရှိ"
     drift = []
-    if h(soul) != src_h:
-        drift.append("SOUL.md")
-    if h(jour) != src_h:
-        drift.append("study_journal/MAIN_ROLE.md")
+    for fname, to_soul in files:
+        src = DIR / fname
+        src_h = h(src)
+        if src_h is None:
+            drift.append(f"{fname} မရှိ")
+            continue
+        if h(DIR / "study_journal" / fname) != src_h:
+            drift.append(f"journal/{fname}")
+        if to_soul and h(pathlib.Path(r"C:\Users\user\AppData\Local\hermes\SOUL.md")) != src_h:
+            drift.append("SOUL.md")
     if drift:
         return f"❌ DRIFT: {', '.join(drift)} (run sync_role.py)"
-    return "✅ role files in sync"
+    return "✅ all role files in sync (4 files)"
 
 
 def main():

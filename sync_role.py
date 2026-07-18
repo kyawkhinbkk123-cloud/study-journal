@@ -1,12 +1,21 @@
-# sync_role.py - Keep MAIN_ROLE.md in sync across all load points.
-# Run after editing scripts/MAIN_ROLE.md.
+# sync_role.py - Keep all 4 architecture files in sync across load points.
+# Run after editing any of: MAIN_ROLE.md, MEMORY_MAP.md, MEMORY_LESSONS.md, PITFALLS.md
+# in scripts/. Copies them to study_journal/ (git). MAIN_ROLE.md ALSO copies to SOUL.md.
 # Off-system (file copy only) - no approval needed.
 import os, shutil, hashlib, sys
 
 HERMES = "C:/Users/user/AppData/Local/hermes"
-SRC = os.path.join(HERMES, "scripts", "MAIN_ROLE.md")
-DST_SOUL = os.path.join(HERMES, "SOUL.md")
-DST_JOURNAL = os.path.join(HERMES, "scripts", "study_journal", "MAIN_ROLE.md")
+SCRIPTS = os.path.join(HERMES, "scripts")
+JOURNAL = os.path.join(SCRIPTS, "study_journal")
+SOUL = os.path.join(HERMES, "SOUL.md")
+
+# (source in scripts/, also copy to SOUL.md?)
+FILES = [
+    ("MAIN_ROLE.md", True),     # -> SOUL.md + journal
+    ("MEMORY_MAP.md", False),
+    ("MEMORY_LESSONS.md", False),
+    ("PITFALLS.md", False),
+]
 
 
 def sha(p):
@@ -14,25 +23,38 @@ def sha(p):
 
 
 def main():
-    if not os.path.exists(SRC):
-        print("ERROR: source missing", SRC)
-        sys.exit(1)
-    src_hash = sha(SRC)
     changes = []
-    for dst in (DST_SOUL, DST_JOURNAL):
-        if sha(dst) != src_hash:
-            shutil.copy2(SRC, dst)
-            changes.append(dst)
+    for fname, to_soul in FILES:
+        src = os.path.join(SCRIPTS, fname)
+        if not os.path.exists(src):
+            print(f"⚠️  missing {src}")
+            continue
+        src_h = sha(src)
+        # journal copy
+        dst_j = os.path.join(JOURNAL, fname)
+        if sha(dst_j) != src_h:
+            shutil.copy2(src, dst_j)
+            changes.append(f"journal/{fname}")
+        # SOUL copy (MAIN_ROLE only)
+        if to_soul:
+            if sha(SOUL) != src_h:
+                shutil.copy2(src, SOUL)
+                changes.append("SOUL.md")
     if changes:
         print("SYNCED ->")
         for c in changes:
-            print("  ", c)
+            print("   ", c)
     else:
         print("ALREADY IN SYNC (no copy needed)")
-    # report drift status
-    print(f"hash MAIN_ROLE={src_hash[:10]}")
-    print(f"hash SOUL     ={sha(DST_SOUL)[:10]} {'OK' if sha(DST_SOUL)==src_hash else 'DRIFT'}")
-    print(f"hash JOURNAL  ={sha(DST_JOURNAL)[:10]} {'OK' if sha(DST_JOURNAL)==src_hash else 'DRIFT'}")
+    # drift report for all 4
+    for fname, to_soul in FILES:
+        src = os.path.join(SCRIPTS, fname)
+        src_h = sha(src)
+        j = sha(os.path.join(JOURNAL, fname))
+        s = sha(SOUL) if to_soul else "n/a"
+        jok = "OK" if j == src_h else "DRIFT"
+        sok = "" if not to_soul else f" soul={'OK' if s==src_h else 'DRIFT'}"
+        print(f"  {fname:22} journal={jok}{sok}")
 
 
 if __name__ == "__main__":
