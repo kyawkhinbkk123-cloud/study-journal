@@ -25,11 +25,10 @@
       ✎ list = providers.py က source of truth (ဂဏန်း မ hardcode)
         chain: nous→groq→openrouter→mistral→cohere→nvidia(+gemini)
         ─────────────────────────────────────────────
-        active (key ရှိ) : openrouter · mistral · cohere · gemini(vision) · groq(?)
+        active (key ရှိ) : openrouter · mistral · cohere · gemini(vision)
         inactive (key မရှိ): nous
+        dead (key bad)     : groq (403 bad key, audit 2026-07-18)
         primary လက်ရှိ : openrouter
-        ⚠️ groq key ရှိ — audit မှာ OK ဆို primary = groq ဖြစ်သင့်
-           (nous absent မို့ chain ၂ ဖိုင်မြောက် groq က ဦးဆုံး)
         nvidia = embed/RAG (curl only) — text chain fallback မဟုတ်
 
 ───────────────────────────────────────────────────────────────

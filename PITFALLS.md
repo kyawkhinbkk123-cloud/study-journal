@@ -54,3 +54,10 @@
 ---
 
 <!-- နောက် dead-end တွေ အောက်မှာ append: ❌❌✅ တစ်ခါတည်း -->
+
+## [2026-07-18] groq key dead (403) but listed in chain
+**SIG:** providers.py chain မှာ groq ပါ, .env GROQ_API_KEY SET (len 56) ဒါပေမယ့် audit=403 bad key
+**❌** "groq(?)" လို့ သံသယနဲ့ ထား → ငတ်, reality=dead
+**✅** audit status ကို final ယူ → "dead (key bad): groq" ရေး
+**guard:** provider chain ထဲ key SET ဆိုတာ OK မဟုတ် — audit live status ကို source of truth ထား
+tags: #providers #groq #audit
