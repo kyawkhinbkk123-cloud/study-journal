@@ -121,3 +121,10 @@ tags: #gemini #vision #verified
 **✅** _post -> curl subprocess -> groq OK (primary works)
 **guard:** Windows provider HTTP = use curl subprocess, not urllib. urllib unreliable for groq.
 **tags:** #providers #groq #windows #urllib #curl
+
+## [2026-07-18] Sandbox breach: study code imports providers (curl tunnel)
+**SIG:** verify.py blocked subprocess/os.system but NOT local infra import
+**❌** study code `import providers` -> providers._post -> curl subprocess (key leak)
+**✅** BLOCKED_MODULES added: providers/telegram_bot/study/verify/sync_role/__audit/config
+**guard:** study sandbox must block infra module imports, not just subprocess keyword
+**tags:** #sandbox #verify #security #tunnel
