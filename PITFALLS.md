@@ -135,3 +135,10 @@ tags: #gemini #vision #verified
 **✅** fix later: code_study list_sources len<2 -> "shallow" flag; audit note-quality tier (rich/ok/shallow)
 **guard:** format-ok != content-rich. README-only repo = shallow by definition. Count sources.
 tags: #code_study #quality #blindspot #shallow
+
+## [2026-07-18] sandbox scan != runtime check (Day 33 bug)
+**SIG:** day-33.py cosine nb=sum(x*y for x in b) NameError -> run fail, scan pass
+**❌** verify.py scan = syntax/import/keyword only, runtime NameError မ ဖမ်း
+**✅** fix: study code run မစခင် py_compile လုပ် (Day 34 ကစလုပ်)
+**guard:** sandbox pass != run pass. Always py_compile before execute.
+tags: #sandbox #verify #runtime #pitfall
