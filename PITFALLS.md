@@ -70,3 +70,11 @@ tags: #providers #groq #audit
 **why:** code မှန်ပေမယ့် token ကို နှစ်ခု ပြိုင် poll → 409 (Telegram 1 bot=1 poll only)
 **guard:** 409 = external conflict, code fix နဲ့ မပျောက်။ Kyaw က cloud/account စစ်ရမယ်။
 tags: #telegram #409 #external #studybot
+
+## [2026-07-18] 409 FIXED: TELEGRAM_BOT_TOKEN was gateway bot
+**SIG:** study bot 409 even after TELEGRAM_BOT_TOKEN code fix
+**❌** code fix မှန် (TELEGRAM_BOT_TOKEN read) ဒါပေမယ့် .env ထဲ token = @kyawkk3_bot (gateway)
+**✅** verify: getMe on TELEGRAM_BOT_TOKEN -> kyawkk3_bot (NOT kkk4study_bot)
+**✅** replaced TELEGRAM_BOT_TOKEN = real @kkk4study_bot (8090957427) -> 409 gone, stable 40s+
+**guard:** 409 = 2 procs polling SAME bot. Verify BOTH tokens via getMe -> different usernames.
+tags: #telegram #409 #env #resolved
