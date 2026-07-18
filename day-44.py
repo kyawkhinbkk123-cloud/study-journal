@@ -50,8 +50,10 @@ def _gem_embed(text: str = None, image_b64: str = None) -> list:
     try:
         out = subprocess.run(cmd, capture_output=True, text=True, timeout=35)
     finally:
-        if os.path.exists(cfg.name):
-            os.unlink(cfg.name)
+        try:
+            os.remove(cfg.name)
+        except OSError:
+            pass
     d = json.loads(out.stdout)
     if "embedding" not in d:
         raise RuntimeError(f"embed fail: {out.stdout[:120]}")

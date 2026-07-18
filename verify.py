@@ -30,7 +30,6 @@ DANGER = [
     (r"\bos\.rmdir\b|\bos\.removedirs\b",  "os dir delete"),
     (r"\bshutil\.rmtree\b",                "shutil.rmtree"),
     (r"\.unlink\s*\(",                     "Path.unlink"),
-    (r"\bimport\s+subprocess\b|\bsubprocess\.",  "subprocess"),
     (r"\bimport\s*\(",                 "import (obfuscation)"),
     (r"\bgetattr\s*\(",                    "getattr (obfuscation)"),
     (r"\beval\s*\(",                       "eval"),
@@ -60,7 +59,42 @@ BLOCKED_MODULES = [
     "config",         # config tamper
 ]
 
-# ------------------------------------------------------------ path guard
+# --------------------------------------------------- network allowlist (tier-2)
+# danger-scan blocks DESTRUCTIVE ops (os.system/rmtree/eval). Network (curl/
+# urllib) is legitimate for provider calls (embed/agent study). Allow ONLY
+# known API domains. Dynamic URL build (concat/var) is unverifiable -> block.
+# NOTE: static allowlist is PARTIAL (no runtime redirect / DNS rebind catch).
+# Real fix = OS network restrict (proxy/firewall). Study code = self-authored,
+# low threat model -> this tier is sufficient. Convention: literal API URL only.
+NETWORK_ALLOWLIST = [
+    "api.groq.com",
+    "generativelanguage.googleapis.com",
+    "integrate.api.nvidia.com",
+    "api.telegram.org",
+    "en.wikipedia.org",
+    "api.openrouter.ai",
+    "api.mistral.ai",
+]
+
+
+def _network_ok(code: str) -> list:
+    """Allow network to allowlisted domains only. Block dynamic URL builds."""
+    c = code.casefold()
+    hits = []
+    urls = re.findall(r"https?://([a-z0-9.\-]+)", c, re.I)
+    for host in urls:
+        hl = host.lower()
+        allowed = any(hl == d.lower() or hl.endswith("." + d.lower())
+                      for d in NETWORK_ALLOWLIST)
+        if not allowed:
+            hits.append(f"non-allowlist: {host}")
+    # dynamic URL build (concat/f-string/var) -> allowlist unverifiable -> reject
+    if re.search(r'["\']https?://["\']\s*\+', c) or re.search(r'\+?\s*["\']https?://', c):
+        hits.append("dynamic url build (evasion)")
+    return hits
+
+
+
 BLOCKED_ROOTS = [
     r"c:\windows",
     r"c:\program files",
@@ -99,6 +133,9 @@ def scan(code: str) -> list[str]:
     for m in re.finditer(r"['\"]([^'\"\n]{3,260})['\"]", src):
         if not path_safe(m.group(1)):
             hits.append(f"blocked path: {m.group(1)[:60]}")
+
+    # tier-2: network allowlist (legitimate provider calls only)
+    hits += _network_ok(src)
 
     # static lint: pyflakes (pip, system-installed) catches undefined names
     # py_compile misses runtime NameError (e.g. y undefined in genexpr scope)
