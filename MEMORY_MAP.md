@@ -87,8 +87,8 @@ C:/Users/user/AppData/Local/hermes/
   study.db ......... fact QUERY ........... note ပြန်ရှာ
 ═══════════════════════════════════════════════════════════════
 
-## [2026-07-19] TELEGRAM ROUTING (verified via screenshot)
-- @study_bot (8090957427) = Hermes Main Agent reply channel. Gateway uses .env TELEGRAM_BOT_TOKEN=809095.
-- kkk3 / kyawkk3_bot (824051) = separate chat, NOT study bot.
-- Kyaw messaging @study_bot = talking to Main Agent (CORRECT, intended). Do NOT say "wrong bot".
-- Confusion: both bots look similar in Telegram list. Study_bot chat = main agent. That is by design.
+## [2026-07-19] TELEGRAM ROUTING (verified via screenshot + Kyaw clarification)
+- kkk3 / kyawkk3_bot (824051) = Hermes MAIN AGENT chat (Kyaw talks here for control/decisions).
+- @study_bot (8090957427) = STUDY/LEARNING bot only (photo/text -> study_inbox -> note). NOT main agent.
+- Gateway .env TELEGRAM_BOT_TOKEN=809095 -> study_bot is learning channel; kkk3 is separate main-agent channel.
+- DO NOT confuse: kkk3 = control, study_bot = learning. Kyaw messages kkk3 for agent work.
