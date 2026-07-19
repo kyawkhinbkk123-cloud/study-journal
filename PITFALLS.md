@@ -6,6 +6,13 @@
 
 ---
 
+## [2026-07-19] forex_study.py exit 0 ≠ success (all providers down)
+**SIG:** background job exit code 0, but log shows `all providers unavailable`, repos `flagged garbage`, **0 notes saved**
+**❌** trust the cron `exit 0 = done` assumption for forex_study.py → silent no-op day
+**✅** verify: (a) grep log for `all providers unavailable`/`flagged garbage`; (b) `SELECT count(*) FROM study_notes` before/after — if no new row, it failed. Don't call the day done on exit code alone.
+**why:** groq/openrouter cooldown + mistral daily cap(120) + gemini reserved-for-vision + nous/cerebras/deepseek no key → all unavailable simultaneously is reachable. Script exits 0 regardless.
+**mitigation:** run forex study only when a text provider is free (mistral still has quota, or groq/openrouter cooldown cleared). Re-run after cooldown.
+
 ## [2026-07-18] Memory tool hard cap 2200 chars
 **SIG:** save/update rejected "over the limit" မျိုး
 **❌** စာရှည်တဲ့ entry တိုအောင်ချုံ့ပြီး ထပ်ထည့်ဖို့ ကြိုးစား → ပြည့်နေ
@@ -209,6 +216,25 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 **root:** metric right, criteria wrong. "trivial" defined by statement-count (proxy) not by function-role.
 **rule:** measurement != correctness. After measuring, VALIDATE criteria: sample the excluded set (skip/drop) -> confirm truly trivial. Quantify then verify exclusion.
 **tags:** #meta #false-alarm #verify #pitfall #quantify
+
+## [2026-07-19] Kimi/Moonshot = paid-only (free tier discontinued)
+**fact:** platform.moonshot.cn/pricing shows 充值 (recharge) only. 免费 = file API temp-free, NOT model API.
+  Key suspended (insufficient balance). kimi-moonlight model deprecated/free promo ended.
+**decision:** SKIP. Not wired to provider chain. .env key kept for future reactivate.
+
+## [2026-07-19] ALL TEXT PROVIDERS DEAD (forex/coding study blocked 23:05-23:10)
+**SIG:** forex_study.py cron run -> exit -1 (crash). 2 runs failed same way.
+**root causes (verified via curl):**
+  1. groq = HTTP 403 / error 1010 (Cloudflare region/IP ban — Thailand IP blocked).
+  2. openrouter = HTTP 404 "model unavailable for free" (free slug dead).
+  3. mistral = daily cap 120 reached (resets next UTC day).
+  4. gemini = vision-only (text not used by chat()).
+  5. nous/cerebras/deepseek = no key in .env.
+**secondary bug:** forex_study.py line 40 hardcodes `os.environ["OPENROUTER_API_KEY"]=""` (disables openrouter).
+  Correct call (openrouter WAS dead anyway 404), but means "no key" error is self-inflicted on forex runs.
+**result:** NO text provider usable -> forex study cannot run until mistral cap resets (next day) OR groq IP ban lifted.
+**action:** study_journal push NOT done for forex_notes.json (file not even in study_journal git — separate gap, see other entry).
+**tags:** #all-dead #groq-403 #openrouter-404 #mistral-cap #forex-blocked #escalation
 
 ## [2026-07-19] Kimi/Moonshot = paid-only (free tier discontinued)
 **fact:** platform.moonshot.cn/pricing shows 充值 (recharge) only. 免费 = file API temp-free, NOT model API.
