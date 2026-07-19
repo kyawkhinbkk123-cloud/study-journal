@@ -221,3 +221,12 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 **real:** repo HAS .py (reasoning_agent.py etc) - wrong curl path (subfolder) caused miss.
 **rule:** verify code presence via GitHub API (contents/) not README-only. Don't claim template from 1 file.
 **tags:** #meta #false-alarm #verify #agent-repo
+
+## [2026-07-19] Coding/forex overnight study = save-only, NOT pushed (DONE bar gap)
+**SIG:** overnight cron (code_study.py) exit 0, repo notes present — but study_journal remote `main` had no commit for them.
+**❌** code_study.py writes `scripts/code_notes.json` only. No copy to `study_journal/`, no `git add/commit/push`.
+**❌** study_journal/code_notes.json was stale (Jul 18) vs scripts/ (Jul 19 22:53) — missed ~24h of study from remote.
+**✅** manual fix this run: `cp code_notes.json study_journal/ && git add && git commit && git push -u origin main` (first push needed upstream set; branch=main NOT master).
+**why:** MAIN_ROLE DONE bar = "note saved + pushed". Save-alone ≠ done. Pipeline lacks push step.
+**TODO/ASK:** make code_study.py push to study_journal itself (or wrap cron in sync+push) — SYSTEM fix, pending Kyaw approval.
+**tags:** #push-gap #code_study #study_journal #done-bar #ask
