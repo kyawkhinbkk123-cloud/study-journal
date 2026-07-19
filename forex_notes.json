@@ -1,0 +1,106 @@
+{
+  "EA31337/EA31337-Libre": {
+    "note": "**အကောင့်စာစုအကြောင်းအရာများ**\n\n*  အကောင့်စာစုအမည်: EA31337-Libre\n*  လိုင်စင်: GNU General Public License 3.0\n*  လိုင်စင်အကျဉ်းချုပ်: <http://www.gnu.org/licenses/>\n\n**အကောင့်စာစုအခြေခံအချက်များ**\n\n*  `OnInit()` အခြေခံအချက်များကို စီစဉ်ပေးသည်\n*  `OnTick()` အခြေခံအချက်များကို စီစဉ်ပေးသည်\n*  `OnDeinit()` အခြေခံအချက်များကို စီစဉ်ပေးသည်\n\n**အကောင့်စာစုအခြေခံအချက်များ**\n\n*  အကောင့်စာစုအခြေခံအချက်များကို စီစဉ်ပေးသည်\n*  အကောင့်စာစုအခြေခံအချက်များကို စီစဉ်ပေးသည်\n\n**အကောင့်စာစုအခြေခံအချက်များ**\n\n*  အကောင့်စာစုအခြေခံအချက်များကို စီစဉ်ပေးသည်\n\n**အကောင့်စာစုအခြေခံအချက်များ**\n\n*  အကောင့်စာစုအခြေခံအချက်များကို စီစဉ်ပေးသည်\n\n**အကောင့်စာစုအခြေခံအချက်များ**\n\n*  အကောင့်စာစုအခြေခံအချက်များကို စီစဉ်ပေးသည်\n\n**အကောင့်စာစုအခြေခံအချက်များ**\n\n*  အကောင့်စာစုအခြေခံအချက်များကို စီစဉ်ပေ",
+    "provider": "openrouter",
+    "files": [
+      "src/EA31337-Libre.mq4",
+      "src/EA31337-Libre.mq5"
+    ],
+    "ts": "2026-07-17 06:04"
+  },
+  "HFTHaidra/HFT-Arbitrage-EA-MQL4-MQL5": {
+    "note": "**Topic:** အကောင့်အမျိုးအစားများ\n\n**Strategy:** အကောင့်အမျိုးအစားများသည် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစားများနှင့် အကောင့်အမျိုးအစားများကို အကောင့်အမျိုးအစ",
+    "provider": "openrouter",
+    "files": [
+      "DarwinexFast/Experts/Fast.mq5",
+      "DarwinexFast/Include/socket-library-mt4-mt5.mqh",
+      "Fast_2022.mq5",
+      "Include/socket-library-mt4-mt5.mqh",
+      "SlowBreker/SlowBreker/Experts/Slow.mq4",
+      "SlowBreker/SlowBreker/Experts/Slow.mq5"
+    ],
+    "ts": "2026-07-17 01:04"
+  },
+  "peterthomet/MetaTrader-5-and-4-Tools": {
+    "note": "**Topic:** မကြားတဲ့ ဖုန်းစာအုပ်များ\n\n**Strategy:** စာအုပ်များကို ဖော်ပြပြီး အချိန်ကာလအလိုက် ပြောင်းလဲပြီး ဖော်ပြပါတယ်။\n\n**Risk controls:** မရှိပါ။\n\n**Red flags:** မရှိပါ။\n\n**Lesson:** စာအုပ်များကို ဖော်ပြပြီး အချိန်ကာလအလိုက် ပြောင်းလဲပြီး ဖော်ပြပါတယ်။\n\n**Verdict:** စာအုပ်များကို ဖော်ပြပြီး အချိန်ကာလအလိုက် ပြောင်းလဲပြီး ဖော်ပြပါတယ်။",
+    "provider": "openrouter",
+    "files": [
+      "Charting/Seconds-Main.mq5",
+      "Charting/Seconds.mq5",
+      "Fibo/CHT_AutoFibo_v0.6.mq4",
+      "Fibo/CHT_AutoFibo_v0.6.mq5",
+      "Include/Ado/AdoErrors.mqh",
+      "Include/Ado/AdoTypes.mqh"
+    ],
+    "ts": "2026-07-17 01:05"
+  },
+  "EA31337/EA31337-classes": {
+    "note": "**Topic:** BasicTrade.mqh (MQL4/MQL5)\n\n**Strategy:** အခြေခံ Order ပို့ခြင်း (OrderSend/PositionOpen)။\n\n**Risk controls:** \n- `OrderSend(_symbol,_type,volume,price,slippage,0,0,_comment,_magic,0,clrNONE);` တွင် SL နှင့် TP တန်ဖိုးများမှာ `0` ဖြစ်နေသဖြင့် **NO SL/TP FOUND IN CODE**။\n\n**Red flags:** \n- SL/TP မပါဝင်ခြင်း (No StopLoss/TakeProfit)။\n- Risk Management စနစ် လုံးဝမပါဝင်ခြင်း။\n\n**Lesson:** Order ပို့သည့်အခါ SL/TP ကို `0` ထားခြင်းသည် အကောင့်တစ်ခုလုံးကို အန္တရာယ်ဖြစ်စေသည်။ အမြဲတမ်း SL/TP ထည့်သွင်းရေးသားသင့်သည်။\n\n**Verdict:** အန္တရာယ်များသည်။ အသုံးပြုရန် မသင့်တော်ပါ။",
+    "provider": "gemini",
+    "quality": "ok",
+    "files": [
+      "Account/tests/Account.test.mq4",
+      "Account/tests/Account.test.mq5",
+      "Account/tests/AccountForex.test.mq4",
+      "Account/tests/AccountForex.test.mq5",
+      "Account/tests/AccountMt.test.mq4",
+      "Account/tests/AccountMt.test.mq5"
+    ],
+    "ts": "2026-07-20 00:07"
+  },
+  "pipbolt/experts": {
+    "note": "**Topic:** ပေးထားသော EA များ၏ အခြေခံဖွဲ့စည်းပုံ ခွဲခြမ်းစိတ်ဖြာခြင်း။\n\n**Strategy:** အားလုံးသည် နည်းပညာဆိုင်ရာ အညွှန်းကိန်းများ (Bollinger Bands, Ichimoku, MACD, MA, PSAR, RSI, Stochastic) ကို အခြေခံသည့် ရိုးရှင်းသော Entry/Exit စနစ်များသာ ဖြစ်သည်။\n\n**Risk controls:** NO SL/TP FOUND IN CODE။ ပေးထားသော code အပိုင်းအစများတွင် StopLoss သို့မဟုတ် TakeProfit သတ်မှတ်ချက်များ မပါဝင်ပါ။\n\n**Red flags:**\n၁။ NO SL/TP FOUND IN CODE - အန္တရာယ်အလွန်များသည်။\n၂။ `UseExitStrategy = false` ဟု default သတ်မှတ်ထားခြင်းသည် ထွက်ပေါက်မရှိဘဲ အော်ဒါဖွင့်ထားမည့် အန္တရာယ်ရှိသည်။\n၃။ Risk Management (Lot size, Drawdown limit) နှင့် ပတ်သက်သည့် မည်သည့် code မှ မတွေ့ရပါ။\n\n**Lesson:** ဤ EA များသည် အလွန်အခြေခံကျလွန်းပြီး အန္တရာယ်ကင်းရှင်းရေးအတွက် လိုအပ်သော SL/TP စနစ်များ မပါဝင်သဖြင့် တကယ့်ဈေးကွက်တွင် အသုံးပြုရန် မသင့်တော်ပါ။\n\n**Verdict:** အန္တရာယ်များသည်။ လေ့လာရန်အတွက်သာ ဖြစ်သည်။",
+    "provider": "gemini",
+    "quality": "ok",
+    "files": [
+      "experts/Bollinger-Bands-EA.mq5",
+      "experts/Ichimoku-Kinko-Hyo-EA.mq5",
+      "experts/MACD-EA.mq5",
+      "experts/Moving-Average-Cross-EA.mq5",
+      "experts/Moving-Average-EA.mq5",
+      "experts/Parabolic-SAR-EA.mq5"
+    ],
+    "ts": "2026-07-20 00:07"
+  },
+  "MHZardary/london-strategy-backtest": {
+    "note": "**Topic:** Python-based Trading Logic Analysis\n\n**Strategy:** MACD နှင့် RSI အညွှန်းကိန်းများကို အခြေခံ၍ Buy/Sell ဆုံးဖြတ်ချက်ချသည့် Logic ဖြစ်သည်။\n\n**Risk controls:** NO SL/TP FOUND IN CODE. ပေးထားသော code အပိုင်းအစများတွင် StopLoss သို့မဟုတ် TakeProfit သတ်မှတ်ချက်များ မတွေ့ရှိရပါ။\n\n**Red flags:** \n- NO SL/TP FOUND IN CODE: အန္တရာယ်ရှိသော အချက်ဖြစ်သည်။\n- Hardcoded password: `test/test_mt5_connector.py` တွင် \"password\": \"testpass\" ဟု ပါရှိခြင်းသည် လုံခြုံရေးအရ အလွန်အားနည်းသည်။\n\n**Lesson:** Trading logic ရေးသားရာတွင် အညွှန်းကိန်းများ (Indicators) သာမက Risk Management (SL/TP) ကို မဖြစ်မနေ ထည့်သွင်းရမည်။\n\n**Verdict:** အန္တရာယ်များသည်။ အမှန်တကယ် အသုံးပြုရန်အတွက် Risk Management logic များ လိုအပ်နေသည်။",
+    "provider": "gemini",
+    "quality": "ok",
+    "files": [
+      "main.py",
+      "src/__init__.py",
+      "src/mt5_connector.py",
+      "src/result_analyse.py",
+      "src/trade_logic.py",
+      "test/__init__.py"
+    ],
+    "ts": "2026-07-20 00:08"
+  },
+  "EarnForex/PositionSizer": {
+    "note": "**Topic:** Position Sizer (Trade Management Tool)\n\n**Strategy:** ဤသည် Trading EA မဟုတ်ပါ။ အော်ဒါမဖွင့်မီ Risk Management (Position Sizing) ကို တွက်ချက်ပေးသည့် Utility Tool သာ ဖြစ်သည်။ `OrderSend` ကို အသုံးပြု၍ အော်ဒါပို့ပေးသော်လည်း ၎င်းကိုယ်တိုင်က Market ကို ခန့်မှန်းသည့် Logic မပါဝင်ပါ။\n\n**Risk controls:** \n- `OrderSend(..., order_sl, order_tp, ...)` တွင် SL/TP ပါဝင်သည်။\n- အသုံးပြုသူက Chart ပေါ်ရှိ Line များ (`stoploss_line_color`, `takeprofit_line_color`) ကို ရွှေ့ခြင်းဖြင့် SL/TP ကို သတ်မှတ်ပေးရသည်။\n\n**Red flags:** မရှိပါ။ ဤသည်မှာ ကုန်သွယ်မှုအတွက် အထောက်အကူပြု Tool ဖြစ်ပြီး Martingale သို့မဟုတ် Grid ကဲ့သို့သော အန္တရာယ်ရှိသည့် Logic များ မတွေ့ရပါ။\n\n**Lesson:** Position Sizing သည် Trading တွင် အရေးအကြီးဆုံးဖြစ်သည်။ မိမိအကောင့်၏ Risk ကို ထိန်းချုပ်ရန်အတွက် SL/TP ကို ကြိုတင်သတ်မှတ်ပြီးမှသာ Trade ဝင်သင့်ကြောင်း ဤ Tool က သက်သေပြနေသည်။\n\n**Verdict:** လုံခြုံစိတ်ချရသော Trading Utility Tool ဖြစ်သည်။",
+    "provider": "gemini",
+    "quality": "ok",
+    "files": [
+      "MQL4/Experts/Position Sizer/Defines.mqh",
+      "MQL4/Experts/Position Sizer/HorizontalRadioGroup.mqh",
+      "MQL4/Experts/Position Sizer/Position Sizer Trading.mqh",
+      "MQL4/Experts/Position Sizer/Position Sizer.mq4",
+      "MQL4/Experts/Position Sizer/Position Sizer.mqh",
+      "MQL4/Experts/Position Sizer/TesterSupport.mqh"
+    ],
+    "ts": "2026-07-20 00:06"
+  },
+  "fintechees/Expert-Advisor-Studio": {
+    "note": "**Topic:** အောက်ပါအီးအေးမျာ်ကိုလေ့လာမှုအကြောင်း\n\n**Strategy:**\n\n1.  **Arbitrage Strategy (fintechee_external_arbitrage.js)**: အောက်ပါအကြောင်းအရ အားဘတ်ရေးသမားများအကြား အကြောင်းအရာများကို အားကစားပြိုင်ရေးအဖြစ် အောက်ပါအကြောင်းအရ လုပ်ဆောင်သည်။\n    *   အောက်ပါအကြောင်းအရ အားဘတ်ရေးသမားများအကြား အကြောင်းအရာများကို အားကစားပြိုင်ရေးအဖြစ် လုပ်ဆောင်သည်။\n        *   အောက်ပါအကြောင်းအရ အားဘတ်ရေးသမားများအကြား အကြောင်းအရာများကို အားကစားပြိုင်ရေးအဖြစ် လုပ်ဆောင်သည်။\n            *   `if (bidExt > askFintechee) { if (bidFintechee > askExt) {`\n2.  **Arbitrage Strategy (sample_trading_arbitrage.js)**: အောက်ပါအကြောင်းအရ အားဘတ်ရေးသမားများအကြား အကြောင်းအရာများကို အားကစားပြိုင်ရေးအဖြစ် အောက်ပါအကြောင်းအရ လုပ်ဆောင်သည်။\n    *   အောက်ပါအကြောင်းအရ အားဘတ်ရေးသမားများအကြား အကြောင်းအရာများကို အားကစားပြိုင်ရေးအဖြစ် လုပ်ဆောင်သည်။\n        *   `if (ask1 < bid2) { sendOrder(acc1.brokerName, acc1.accountId, acc1",
+    "provider": "openrouter",
+    "files": [
+      "EA/Arbitrage/fintechee_external_arbitrage.js",
+      "EA/Arbitrage/sample_trading_arbitrage.js",
+      "EA/Built-in/sample_using_rsi.js",
+      "EA/Built-in/sample_using_sma.js",
+      "EA/Chaos/chaos.js",
+      "EA/CopyTrading/copy_trading_for_oanda.js"
+    ],
+    "ts": "2026-07-17 06:03"
+  }
+}
