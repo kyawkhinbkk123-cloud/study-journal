@@ -6,14 +6,29 @@
 
 ---
 
-## [2026-07-19] forex_study.py exit 0 ≠ success (all providers down)
-**SIG:** background job exit code 0, but log shows `all providers unavailable`, repos `flagged garbage`, **0 notes saved**
-**❌** trust the cron `exit 0 = done` assumption for forex_study.py → silent no-op day
-**✅** verify: (a) grep log for `all providers unavailable`/`flagged garbage`; (b) `SELECT count(*) FROM study_notes` before/after — if no new row, it failed. Don't call the day done on exit code alone.
-**why:** groq/openrouter cooldown + mistral daily cap(120) + gemini reserved-for-vision + nous/cerebras/deepseek no key → all unavailable simultaneously is reachable. Script exits 0 regardless.
-**mitigation:** run forex study only when a text provider is free (mistral still has quota, or groq/openrouter cooldown cleared). Re-run after cooldown.
+## [2026-07-19] study scripts exit code ≠ success (verify *_notes.json, not exit code)
+**SIG:** background job exit 0 (or -1=4294967295) but no useful work done
+**❌** (a) trust the cron `exit 0 = done` assumption → silent no-op days; (b) check `study_notes` table to verify forex/code done — WRONG store (that's the ML/agent curriculum)
+**✅** study scripts write to JSON, NOT study.db: `forex_study.py`→**forex_notes.json**, `code_study.py`→**code_notes.json**. Verify: (a) grep log for `all providers unavailable`/`flagged garbage` = fail; (b) load the JSON, check each entry: `note` length >0 AND `quality != "garbage"`. A `ts` from tonight is NOT proof of success — garbage entries also get stamped. Only run when a text provider is free.
+**why:** all-providers-down is reachable (groq/openrouter cooldown + mistral daily cap 120 + gemini vision-only + nous/cerebras/deepseek no key). Scripts exit 0 or -1 regardless and still write `quality:garbage` placeholders with empty `note`.
+**also seen:** exit `-1` (killed mid-backoff) ALSO yields 0 real notes — same trap, don't trust ANY exit code. `openrouter` key flipped to "no key" between runs (was key=True) → check .env if persists; groq went cooldown→RuntimeError (rate-limited).
+**verified success example:** 2026-07-19 forex run → 8 entries in forex_notes.json, note lengths 333–883, quality ok, timestamps 22:47–23:25.
+**verified FAIL example:** 2026-07-19 code_study run (after sleep 100 cooldown) → 6 entries all `quality:garbage`, empty `note`, exit 0. Same provider-down.
 
-## [2026-07-18] Memory tool hard cap 2200 chars
+## [2026-07-20] cooldown-gate race: shared provider_state.json + overlapping study procs
+**SIG:** wrapper waited for `provider_state.json` `cooldown_until`≤now, then launched code_study → but code_study STILL saw `groq cooldown 194s` and wrote all-garbage
+**❌** assume a pre-launch `cooldown_until` check is enough — a concurrent study process re-extends `cooldown_until` on the SHARED json at the exact moment the new run starts, poisoning its gate
+**✅** BEFORE launching any study run: (1) kill ALL other study procs (`tasklist`/`wmic` for `forex_study.py`/`code_study.py` — they linger as orphans even after "exit 0" reported); (2) then wait for cooldown; (3) re-check state IMMEDIATELY before subprocess.run, not 20-1500s earlier. Only one study process may touch provider_state.json at a time.
+**why:** `providers.py` persists cooldown to one shared `provider_state.json` (`_STATE_FILE = _DIR/"provider_state.json"`). forex_study.py (PID 5288) was still alive at 00:09 after its "exit 0", thrashing the state while code_study started → race. Wrapper's pre-check is defeated by a concurrent writer.
+**also:** midnight resets daily cap (`day` flips 2026-07-19→2026-07-20, `calls`→0) — mistral gets fresh 120 quota then, but is cooldown-locked ~3min from the thrash. After kill + cooldown, mistral is the clean free path.
+
+## [2026-07-20] study script orphan processes survive "exit 0"
+**SIG:** `forex_study.py` reported "completed normally (exit code 0)" yet a python.exe running `forex_study.py` (PID 5288) was STILL ALIVE 30+ min later, thrashing provider_state.json
+**❌** trust the background-process "completed" event = process really gone — the launcher/shell may detach while the child keeps running (MT5/long-poll style)
+**✅** after any study run, `tasklist | wmic` for the script name; if still present, `taskkill /F /PID` it before the next run. Overlapping study procs corrupt shared cooldown state (see above).
+**why:** multiple "exit 0" study runs stacked without cleanup → 12+ python procs, shared state thrash, every later run starved.
+
+---
 **SIG:** save/update rejected "over the limit" မျိုး
 **❌** စာရှည်တဲ့ entry တိုအောင်ချုံ့ပြီး ထပ်ထည့်ဖို့ ကြိုးစား → ပြည့်နေ
 **❌** batch ထဲ တစ်ခု fail → အားလုံး မလုပ် (all-or-nothing)
@@ -234,7 +249,8 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
   Correct call (openrouter WAS dead anyway 404), but means "no key" error is self-inflicted on forex runs.
 **result:** NO text provider usable -> forex study cannot run until mistral cap resets (next day) OR groq IP ban lifted.
 **action:** study_journal push NOT done for forex_notes.json (file not even in study_journal git — separate gap, see other entry).
-**tags:** #all-dead #groq-403 #openrouter-404 #mistral-cap #forex-blocked #escalation
+**RESOLVED 2026-07-20 00:06-04:02:** mistral daily cap reset (UTC) -> forex study ran OK (4 repos, provider gemini/mistral), coding study ran OK (2x mistral). forex_notes.json + code_notes.json NOW pushed to study_journal (gap closed). groq 403 IP ban + openrouter 404 STILL dead (only mistral/gemini text usable).
+**tags:** #all-dead #groq-403 #openrouter-404 #mistral-cap #forex-blocked #escalation #resolved-next-day
 
 ## [2026-07-19] Kimi/Moonshot = paid-only (free tier discontinued)
 **fact:** platform.moonshot.cn/pricing shows 充值 (recharge) only. 免费 = file API temp-free, NOT model API.
@@ -256,3 +272,18 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 **why:** MAIN_ROLE DONE bar = "note saved + pushed". Save-alone ≠ done. Pipeline lacks push step.
 **TODO/ASK:** make code_study.py push to study_journal itself (or wrap cron in sync+push) — SYSTEM fix, pending Kyaw approval.
 **tags:** #push-gap #code_study #study_journal #done-bar #ask
+
+## [2026-07-20] cron Windows path: `C:\` backslash → bash strips → EXIT 127
+**SIG:** overnight cron given literal `C:\Users\user\...\python.exe code_study.py ...` → `EXIT_CODE=127`, bash: `C:UsersuserAppData...: command not found`
+**❌** pass Windows BACKSLASH paths to the git-bash shell (terminal() runs bash/MSYS, NOT cmd). `\U`/`\u`/`\A` are escape chars → stripped → `C:Usersuser...` → command not found.
+**✅** use `C:/Users/user/...` (forward slash — valid Windows path, keeps `C:` drive prefix) OR single-quote `'C:\Users\user\...'` (literal backslash). Both EXECUTE. `C:/` is cleanest (also works for `>` redirect targets).
+**why:** user said "NO MSYS /c/ style" + "no cd". `C:/` satisfies both: Windows-native `C:` prefix, no `/c/` conversion, no backslash-escape bug. `/c/Users/...` also works but is the banned MSYS form.
+**verify:** `C:/Users/user/AppData/Local/Programs/Python/Python310/python.exe --version` → `Python 3.10.0`, rc=0.
+**tags:** #cron #windows #bash #path #127 #escape #gotcha
+
+## [2026-07-20] re-run overwrite risk: two code_study runs same night
+**SIG:** ran code_study.py manually at 02:52 → scripts/code_notes.json (ts 02:52–02:54, provider mistral, English notes). But study_journal already had commit `583f18b` (02:48) with SAME 6 repos, kavaan note in MYANMAR + provider groq (more role-aligned: §2 groq primary, §8 Myanmar).
+**❌** blindly `cp scripts/code_notes.json study_journal/ && push` on every run → overwrites the better-aligned committed notes with a near-duplicate (buffer provider, English), redundant commit noise.
+**✅** before push: diff scripts/ vs study_journal/ code_notes.json. If study_journal ALREADY has tonight's valid notes (quality:ok) — SKIP push, report. Only push when study_journal is genuinely behind (missing repos / stale / garbage).
+**why:** ROLE precedence = correctness > automation, survivability > progress. Don't regress good notes for a redundant copy.
+**tags:** #push #code_study #dedup #overwrite #cron
