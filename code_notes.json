@@ -1,6 +1,6 @@
 {
   "kavaan/awesome-clean-code-projects-across-languages-and-framework": {
-    "note": "⚠️ shallow (code source<2) — **Topic:** Clean Architecture\n**Pattern:** Separation of Concerns, Single-Responsibility Principle\n**Principles:** \n- Separation of Concerns: ကိုဒ်များကို အမျိုးအစားခွဲခြားထားခြင်း\n- Single-Responsibility Principle: တစ်ခုတည်းသော တာဝန်ကို ထမ်းဆောင်ခြင်း\n**Example code:** \n```javascript\n// ဥပမာအားဖြင့် React + TypeScript Clean Architecture တွင် \n// entity နှင့် usecase ကို ခွဲထားခြင်း\n// entity\nexport interface UserEntity {\n  id: number;\n  name: string;\n}\n\n// usecase\nexport interface GetUserUseCase {\n  execute(): UserEntity;\n}\n```\n**Lesson:** ကိုဒ်များကို အမျိုးအစားခွဲခြားထားခြင်းသည် အရေးပါသည်။ တစ်ခုတည်းသော တာဝန်ကို ထမ်းဆောင်ခြင်းသည် ကိုဒ်များကို ရိုးရှင်းစေခြင်းနှင့် လွယ်ကူစေခြင်း ဖြစ်သည်။\n**Verdict:** Clean Architecture သည် ကိုဒ်များကို အမျိုးအစားခွဲခြားထားခြင်းနှင့် တစ်ခုတည်းသော တာဝန်ကို ထမ်းဆောင်ခြင်း တို့ကို အားပေးခြင်း ဖြစ်သည်။",
+    "note": "⚠️ shallow (code source<2) — **Topic:** Clean Architecture \n**Pattern:** Separation of Concerns, Single-Responsibility Principle\n**Principles:** \n- Separation of Concerns: ကိုဒ်များကို အမျိုးအစားခွဲခြားခြင်း\n- Single-Responsibility Principle: တစ်ခုတည်းသော တာဝန်ယူမှု စည်းကမ်း\n**Example code:** \n```javascript\n// ဥပမာအားဖြင့် React Clean Architecture တွင် \n// entity, usecase, repository, infrastructure စသည်တို့ကို ခွဲခြားထားခြင်း\n// entity\nclass UserEntity {\n  // ...\n}\n\n// usecase\nclass GetUserUsecase {\n  // ...\n}\n\n// repository\nclass UserRepository {\n  // ...\n}\n\n// infrastructure\nclass UserInfrastructure {\n  // ...\n}\n```\n**Lesson:** ကိုဒ်များကို အမျိုးအစားခွဲခြားခြင်းဖြင့် ရေးသားခြင်းသည် အလွန်အရေးပါသည်။ ထို့ကြောင့် ကိုဒ်များကို အမျိုးအစားခွဲခြားခြင်းဖြင့် ရေးသားရန် လေ့လာရန် လိုအပ်သည်။\n**Verdict:** ကိုဒ်များကို အမျိုးအစားခွဲခြားခြင်းဖြင့် ရေးသားခြင်းသည် အလွန်အရေးပါသည်။ ထို့ကြောင့် ကိုဒ်များကို အမျိုးအစားခွဲခြားခြင်းဖြင့် ရေးသားရန် လေ့လာရန် လိုအပ်သည်။",
     "provider": "groq",
     "quality": "ok",
     "tier": "shallow",
@@ -8,10 +8,10 @@
     "files": [
       "README.md"
     ],
-    "ts": "2026-07-20 02:46"
+    "ts": "2026-07-20 03:46"
   },
   "SebastienDegodez/copilot-instructions": {
-    "note": "⚠️ shallow (code source<2) — **Topic:** Repository Structure & Agent Workflow Design\n\n**Pattern:** Modular Agent-Based Architecture\n\n**Principles:**\n- **Separation of Concerns**\n  - `agents/architect.agent.md`: \"Do some information gathering... Ask the user clarifying questions...\"\n  - `agents/slides-wizard.agent.md`: Dedicated purpose (\"Slides Wizard Chatmode\") with constrained behavior.\n\n- **Documentation-Driven Development**\n  - `.github/copilot-instructions.md`: \"Consult any relevant instructions files... list which rule files have been used.\"\n\n- **TDD Workflow Enforcement**\n  - `.github/copilot-instructions.md`: \"Follow TDD when it is possible. Always start new changes by writing new test cases.\"\n\n**Example code:**\n```markdown\n1. Consult any relevant instructions files listed below and start by listing which rule files have been used...\n2. Follow TDD when it is possible. Always start new changes by writing new test cases...\n```\n\n**Lesson:**\n- Agents enforce role-specific workflows (e.g., architect vs. slides-wizard).\n- Instructions files act as reusable rulebooks for code generation.\n\n**Verdict:** Reusable for agent-based project scaffolding.",
+    "note": "⚠️ shallow (code source<2) — **Topic:** Repository Structure & Agent Workflow Design\n\n**Pattern:** Modular Agent-Based Architecture with Clear Responsibilities\n\n**Principles:**\n1. **Separation of Concerns** - Each agent file has a distinct role (e.g., architect, slides-wizard).\n   - `agents/architect.agent.md`: \"Do some information gathering... create a detailed plan...\"\n   - `agents/slides-wizard.agent.md`: \"Purpose\", \"Expected Behavior\", \"Content Strategy\"\n\n2. **Documentation-Driven Development** - Instructions are explicitly listed and followed.\n   - `.github/copilot-instructions.md`: \"Instructions used: [minimal-api.instructions.md, domain-driven-design.instructions.md]\"\n\n3. **TDD (Test-Driven Development) Enforcement** - Tests are prioritized before implementation.\n   - `.github/copilot-instructions.md`: \"Follow TDD when it is possible. Always start new changes by writing new test cases...\"\n\n**Example code:**\n- Architect agent workflow:\n  ```markdown\n  1. Do some information gathering (for example using read_file or search) to get more context...\n  2. Ask the user clarifying questions...\n  3. Create a detailed plan... Include Mermaid diagrams...\n  ```\n- TDD workflow:\n  ```markdown\n  2. Follow TDD when it is possible. Always start new changes by writing new test cases...\n  3. Always run `dotnet test` or `dotnet build` to verify...\n  ```\n\n**Lesson:**\n- Use **modular agent files** to enforce clear roles (e.g., architect vs. slides-wizard).\n- **Explicitly document workflows** (e.g., TDD steps) to ensure consistency.\n- **List used instructions** in commits to track compliance.\n\n**Verdict:** Strong example of **separation of concerns** and **documentation-driven workflows**.",
     "provider": "mistral",
     "quality": "ok",
     "tier": "shallow",
@@ -24,10 +24,10 @@
       ".github/copilot-instructions.md",
       "README.md"
     ],
-    "ts": "2026-07-20 02:47"
+    "ts": "2026-07-20 03:46"
   },
   "iammukeshm/CleanArchitecture.WebApi": {
-    "note": "**Topic:** Role Enumeration and Exception Handling\n\n**Pattern:** Custom Exceptions and Pipeline Validation\n\n**Principles:**\n- **Single Responsibility:** `ApiException` extends `Exception` for API-specific errors.\n  **Example code:** `public class ApiException : Exception`\n- **Error Handling:** `ValidationBehavior` throws `ValidationException` on validation failures.\n  **Example code:** `throw new Exceptions.ValidationException(failures);`\n- **Separation of Concerns:** `ValidationBehavior` handles validation separately from business logic.\n  **Example code:** `public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>`\n\n**Lesson:** Use enums for roles and custom exceptions for API errors. Apply pipeline behaviors for validation.\n\n**Verdict:** Reusable patterns for role management and error handling.",
+    "note": "**Topic:** Role Enumeration & API Exception Handling\n\n**Pattern:** Custom Exceptions & Pipeline Validation\n\n**Principles:**\n- **Single Responsibility:** `ApiException` extends `Exception` for API-specific errors.\n  **Example code:** `public class ApiException : Exception`\n- **DRY (DRY Principle):** Reusable exception class for consistent error handling.\n  **Example code:** `throw new Exceptions.ValidationException(failures);`\n- **Separation of Concerns:** Validation logic isolated in `ValidationBehavior`.\n  **Example code:** `public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>`\n\n**Lesson:** Use enums for roles and custom exceptions for API errors. Pipeline behaviors enforce validation without cluttering core logic.\n\n**Verdict:** ✅ Study-worthy for role-based systems and validation pipelines.",
     "provider": "mistral",
     "quality": "ok",
     "tier": "rich",
@@ -40,10 +40,10 @@
       "Application/DTOs/Account/AuthenticationResponse.cs",
       "Application/DTOs/Account/ForgotPasswordRequest.cs"
     ],
-    "ts": "2026-07-20 02:47"
+    "ts": "2026-07-20 03:47"
   },
   "excellalabs/js-best-practices-workshopper": {
-    "note": "**Topic:** Testing Anti-patterns\n\n**Pattern:** Overlapping assertions\n\n**Principles:** Avoid redundant checks; each test should verify a single concern.\n\n**Example code:**\n```javascript\nexpect(regexDoubleQuotes.test(fileContents)).to.equal(false);\nexpect(regexSingleQuotes.test(fileContents)).to.equal(false); // Redundant\nexpect(regexComment.test(fileContents)).to.equal(false);\n```\n\n**Lesson:** Tests should be atomic and non-redundant. Repeating the same assertion (`regexSingleQuotes.test`) adds no value.\n\n**Verdict:** Refactor to test distinct conditions separately.",
+    "note": "**Topic:** Testing Anti-patterns\n\n**Pattern:** Overlapping assertions\n\n**Principles:** Avoid redundant checks that test the same condition multiple times.\n\n**Example code:**\n```javascript\nexpect(regexSingleQuotes.test(fileContents)).to.equal(false);\nexpect(regexSingleQuotes.test(fileContents)).to.equal(false);\n```\n\n**Lesson:** Repeating the same assertion does not improve test coverage and can mislead debugging.\n\n**Verdict:** Remove duplicate assertions to keep tests clean and meaningful.",
     "provider": "mistral",
     "quality": "ok",
     "tier": "rich",
@@ -56,10 +56,10 @@
       "exercises/bad_practices/problem.ru.md",
       "exercises/bad_practices/solution/solution.js"
     ],
-    "ts": "2026-07-20 02:47"
+    "ts": "2026-07-20 03:47"
   },
   "lubkoKuzenko/angular-clean-code": {
-    "note": "⚠️ shallow (code source<2) — **Topic:** Angular Clean Code Configuration\n\n**Pattern:** Strict TypeScript & Linting Rules\n\n**Principles:**\n- **Type Safety:** `\"noImplicitAny\": true` (Raise error on implicit `any` types)\n- **Decorator Support:** `\"experimentalDecorators\": true` (Enable decorator usage)\n- **Consistent Naming:** `@angular-eslint/directive-selector` with `prefix: \"bb\"` and `style: \"camelCase\"`\n- **Component Naming:** `@angular-eslint/component-selector` with `prefix: \"bb\"` and `style: \"kebab-case\"`\n- **Avoid Renaming:** `@angular-eslint/no-input-rename` (Enforce direct input property names)\n- **Output Naming:** `@angular-eslint/no-output-on-prefix` (Disallow `on`-prefixed outputs)\n- **Type Definitions:** `@typescript-eslint/consistent-type-definitions: \"error\"` (Prefer `interface` over `type`)\n\n**Example code:**\n```json\n\"noImplicitAny\": true,\n\"noImplicitThis\": true,\n\"experimentalDecorators\": true,\n\"@angular-eslint/directive-selector\": [\"error\", { \"type\": \"attribute\", \"prefix\": \"bb\", \"style\": \"camelCase\" }],\n\"@angular-eslint/component-selector\": [\"error\", { \"type\": \"element\", \"prefix\": \"bb\", \"style\": \"kebab-case\" }],\n\"@angular-eslint/no-input-rename\": \"error\",\n\"@angular-eslint/no-output-on-prefix\": \"error\",\n\"@typescript-eslint/consistent-type-definitions\": \"error\"\n```\n\n**Lesson:**\n- Enforce strict typing (`noImplicitAny`, `noImplicitThis`) to catch potential runtime errors early.\n- Use consistent naming conventions (directives: `camelCase`, components: `kebab-case`) for maintainability.\n- Avoid renaming inputs/outputs (`no-input-rename`, `no-output-on-prefix`) to prevent confusion.\n\n**Verdict:** Strong enforcement of Angular/TypeScript best practices via ESLint and strict configurations.",
+    "note": "⚠️ shallow (code source<2) — **Topic:** Angular Clean Code Configuration\n\n**Pattern:** Strict TypeScript & Linting Rules\n\n**Principles:**\n- **Type Safety:** `\"noImplicitAny\": true` enforces explicit types.\n- **Consistent Naming:** `@angular-eslint/directive-selector` enforces `bb` prefix + camelCase.\n- **Component Naming:** `@angular-eslint/component-selector` enforces kebab-case.\n- **Class Suffixes:** `@angular-eslint/component-class-suffix` enforces `Component` suffix.\n- **Output Naming:** `@angular-eslint/no-output-on-prefix` bans `on` prefix for outputs.\n\n**Example code:**\n```json\n\"noImplicitAny\": true,\n\"noImplicitThis\": true,\n\"@angular-eslint/directive-selector\": [\"error\", { \"type\": \"attribute\", \"prefix\": \"bb\", \"style\": \"camelCase\" }],\n\"@angular-eslint/component-selector\": [\"error\", { \"type\": \"element\", \"prefix\": \"bb\", \"style\": \"kebab-case\" }],\n\"@angular-eslint/component-class-suffix\": \"error\",\n\"@angular-eslint/directive-class-suffix\": \"error\",\n\"@angular-eslint/no-output-on-prefix\": \"error\"\n```\n\n**Lesson:**\n- Enforce naming conventions to reduce cognitive load.\n- Use strict TypeScript rules to catch errors early.\n\n**Verdict:** Strong static analysis setup for maintainability.",
     "provider": "mistral",
     "quality": "ok",
     "tier": "shallow",
@@ -67,10 +67,10 @@
     "files": [
       "README.md"
     ],
-    "ts": "2026-07-20 02:48"
+    "ts": "2026-07-20 03:02"
   },
   "henki-robotics/henki_ros2_best_practices": {
-    "note": "⚠️ shallow (code source<2) — **Topic:** ROS 2 Best Practices Documentation Structure\n\n**Pattern:** Modular Documentation\n**Principles:** Separation of concerns, clarity\n**Example code:**\n```markdown\n## Nodes\n## Launch files\n## Parameters and Config Files\n## Logging\n## Message Interfaces\n## Actions and Services\n## Code Style\n## Performance\n## Executors and Callback Groups\n## Dependencies\n## Documentation\n## Testing\n```\n**Lesson:** Each section isolates a specific ROS 2 concern for focused learning.\n**Verdict:** UNKNOWN - truncated (no reusable code-writing principles extracted from actual code).",
+    "note": "⚠️ shallow (code source<2) — **Topic:** ROS 2 Best Practices Documentation Structure\n\n**Pattern:** Hierarchical Documentation\n\n**Principles:**\n- **Organization:** Divided into logical sections for clarity.\n  - `## Nodes`, `## Launch files`, `## Parameters and Config Files`, etc.\n- **Modularity:** Each section focuses on a specific aspect of ROS 2 development.\n  - Example: Separate sections for `## Logging`, `## Message Interfaces`, and `## Testing`.\n\n**Example code:**\n```markdown\n## Nodes\n## Launch files\n## Parameters and Config Files\n## Logging\n## Message Interfaces\n## Actions and Services\n## Code Style\n## Performance\n## Executors and Callback Groups\n## Dependencies\n## Documentation\n## Testing\n```\n\n**Lesson:** Structuring documentation into clear, modular sections improves readability and usability for developers.\n\n**Verdict:** Good practice for maintaining a well-organized and scalable documentation system.",
     "provider": "mistral",
     "quality": "ok",
     "tier": "shallow",
@@ -79,6 +79,6 @@
       "README.md",
       "henki_ros2_best_practices.md"
     ],
-    "ts": "2026-07-20 02:48"
+    "ts": "2026-07-20 03:03"
   }
 }
