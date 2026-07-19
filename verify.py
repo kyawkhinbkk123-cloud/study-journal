@@ -72,6 +72,7 @@ NETWORK_ALLOWLIST = [
     "en.wikipedia.org",
     "api.openrouter.ai",
     "api.mistral.ai",
+    "newsdata.io",
 ]
 
 
