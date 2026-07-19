@@ -209,3 +209,9 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 **root:** metric right, criteria wrong. "trivial" defined by statement-count (proxy) not by function-role.
 **rule:** measurement != correctness. After measuring, VALIDATE criteria: sample the excluded set (skip/drop) -> confirm truly trivial. Quantify then verify exclusion.
 **tags:** #meta #false-alarm #verify #pitfall #quantify
+
+## [2026-07-19] Kimi/Moonshot = paid-only (free tier discontinued)
+**fact:** platform.moonshot.cn/pricing shows 充值 (recharge) only. 免费 = file API temp-free, NOT model API.
+  Key suspended (insufficient balance). kimi-moonlight model deprecated/free promo ended.
+**decision:** SKIP. Not wired to provider chain. .env key kept for future reactivate.
+**tags:** #provider #kimi #paid #skip
