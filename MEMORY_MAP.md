@@ -92,3 +92,10 @@ C:/Users/user/AppData/Local/hermes/
 - @study_bot (8090957427) = STUDY/LEARNING bot only (photo/text -> study_inbox -> note). NOT main agent.
 - Gateway .env TELEGRAM_BOT_TOKEN=809095 -> study_bot is learning channel; kkk3 is separate main-agent channel.
 - DO NOT confuse: kkk3 = control, study_bot = learning. Kyaw messages kkk3 for agent work.
+
+## [2026-07-19] TELEGRAM ROUTING (FINAL - Kyaw clarified)
+- kkk3 (824051) = MAIN AGENT chat. Kyaw talks here for control/decisions/status.
+- @study_bot (809095) = LEARNING only. Photo/text -> study_inbox -> note.
+- Two bots, clear split: kkk3 = talk, study_bot = learn.
+- Do NOT merge/delete. Both healthy (verified: kkk3 replying, study_bot polling pid 11484).
+- Gateway (kkk3) is cloud-managed; study_bot is local poll (telegram_bot.py).
