@@ -1,17 +1,21 @@
 {
   "kavaan/awesome-clean-code-projects-across-languages-and-framework": {
-    "note": "**Topic:** Clean Architecture \n**Pattern:** Separation of Concerns, Single Responsibility Principle\n**Principles:** \n- Separation of Concerns: ကိုဒ်များကို အမျိုးအစားခွဲခြားထားခြင်း\n- Single Responsibility Principle: တစ်ခုတည်းသော တာဝန်ကို ထမ်းဆောင်ခြင်း\n**Example code:** \n```javascript\n// ဥပမာအားဖြင့် React + TypeScript Clean Architecture တွင် \n// entity များကို ပြင်ဆင်ခြင်း\n// user.entity.ts\nexport class User {\n  id: number;\n  name: string;\n}\n```\n**Lesson:** ကိုဒ်များကို အမျိုးအစားခွဲခြားထားခြင်းအားဖြင့် ရေးသားခြင်းသည် အလွန်အရေးပါသည်။ \n**Verdict:** Clean Architecture ကို အသုံးပြုခြင်းအားဖြင့် ကိုဒ်များကို ပိုမို၍ စီမံခန့်ခွဲနိုင်မည်။",
+    "note": "⚠️ shallow (code source<2) — **Topic:** ကြီးမားသော ဆော့ဝဲလ် အသေးစိတ် အခြေခံ ဗိသုကာပညာ\n**Pattern:** Clean Architecture\n**Principles:** \n- Separation of Concerns: `https://github.com/eduardomoroni/react-clean-architecture` တွင် အသေးစိတ် အခြေခံ ဗိသုကာပညာ ကို အသုံးပြုထားပါသည်။ \n- အမည်ပေးခြင်း: `https://github.com/askides/clean-architecture-react` တွင် အမည်များ ရှင်းပြတ်စွာ ပေးထားပါသည်။ \n- Error Handling: `https://github.com/panagiop/node.js-clean-architecture` တွင် အမှား ဖုံးလွှမ်းခြင်း ကို အသုံးပြုထားပါသည်။ \n**Example code:** \n```javascript\n// အသေးစိတ် အခြေခံ ဗိသုကာပညာ ဥပမာ\nclass UserEntity {\n  constructor(id, name) {\n    this.id = id;\n    this.name = name;\n  }\n}\n\nclass UserRepository {\n  async getUser(id) {\n    // အချက်အလက် ရယူခြင်း\n  }\n}\n\nclass UserService {\n  constructor(repository) {\n    this.repository = repository;\n  }\n\n  async getUser(id) {\n    // အသုံးပြုခြင်း\n  }\n}\n```\n**Lesson:** ကြီးမားသော ဆော့ဝဲလ် အသေးစိတ် အခြေခံ ဗိသုကာပညာ ကို အသုံးပြုရန် လိုအပ်ပါသည်။ \n**Verdict:** အသေးစိတ် အခြေခံ ဗိသုကာပညာ ကို အသုံးပြုခြင်း သည် ကြီးမားသော ဆော့ဝဲလ် တွင် အသုံးဝင်ပါသည်။",
     "provider": "groq",
     "quality": "ok",
+    "tier": "shallow",
+    "source_count": 0,
     "files": [
       "README.md"
     ],
-    "ts": "2026-07-18 23:47"
+    "ts": "2026-07-19 22:52"
   },
   "SebastienDegodez/copilot-instructions": {
-    "note": "**Topic:** ကိုက်ပိုင်လော့ အမိန့်များ နှင့် ကြီးမြို့တည် အာ့ကီတဲ့ချာ\n**Pattern:** ကွန်ယက် အာ့ကီတဲ့ချာ ပုံစံ\n**Principles:** \n- ကွဲပြားခြားနားမှု (Separation of Concerns) - `ContactService` → `ContactUseCase`\n- အမည်ပေးခြင်း (Naming) - `ContactUseCase`\n- အားကစားခြင်း (Testing) - `dotnet test`\n- ချို့ယွင်းမှု ကိုင်တွယ်ခြင်း (Error Handling) - ချို့ယွင်းမှု အမည်များ\n- DRY (Don't Repeat Yourself) - အသစ်တည်ဆောက်ခြင်း\n- တစ်ခုတည်း တာဝန် (Single Responsibility) - `IContactReadService`\n**Example code:** \n```csharp\n// ကွဲပြားခြားနားမှု (Separation of Concerns)\npublic class ContactUseCase \n{\n    // ...\n}\n\n// အမည်ပေးခြင်း (Naming)\npublic interface IContactReadService \n{\n    // ...\n}\n\n// အားကစားခြင်း (Testing)\ndotnet test\n\n// ချို့ယွင်းမှု ကိုင်တွယ်ခြင်း (Error Handling)\ntry \n{\n    // ...\n} \ncatch (Exception ex) \n{\n    // ...\n}\n```\n**Lesson:** ကိုက်ပိုင်လော့ အမိန့်များ နှင့် ကြီးမြို့တည် အာ့ကီတဲ့ချာ ပုံစံ တွင် ကွဲပြားခြားနားမှု၊ အမည်ပေးခြင်း၊ အားကစားခြင်း၊ ချို့ယွင်းမှု ကိုင်တွယ်ခြင်း၊ DRY နှင့် တစ်ခုတည်း တာဝန် စသည်တို့ အရေးပါသည်။\n**Verdict:** ကိုက်ပိုင်လော့ အမိန့်များ နှင့် ကြီးမြို့တည် အာ့ကီတဲ့ချာ ပုံစ",
-    "provider": "groq",
+    "note": "⚠️ shallow (code source<2) — **Topic:** Repository Structure & Agent Workflow Design\n**Pattern:** Modular Agent-Based Architecture\n**Principles:**\n- **Separation of Concerns**: Each agent file (`architect.agent.md`, `slides-wizard.agent.md`) has a distinct purpose.\n  - *Example code:* `# Slides Wizard Chatmode` (dedicated to slides generation), `# C# Clean Architecture Development` (dedicated to architecture).\n- **Documentation-Driven Development**: Instructions are centralized in `.github/copilot-instructions.md` for consistency.\n  - *Example code:* `## Development code generation` (workflow rules enforced across agents).\n- **TDD Enforcement**: Explicit requirement to follow TDD (`dotnet test`, `dotnet build`).\n  - *Example code:* `Follow TDD when it is possible. Always start new changes by writing new test cases.`\n\n**Lesson:** Agents should have single-responsibility roles, and workflows must enforce testing standards.\n**Verdict:** Validated for reusable agent design patterns.",
+    "provider": "mistral",
     "quality": "ok",
+    "tier": "shallow",
+    "source_count": 0,
     "files": [
       ".autoresearch/clean-architecture-dotnet/changelog.md",
       ".autoresearch/mutation-testing/changelog.md",
@@ -20,12 +24,14 @@
       ".github/copilot-instructions.md",
       "README.md"
     ],
-    "ts": "2026-07-18 23:56"
+    "ts": "2026-07-19 22:52"
   },
   "iammukeshm/CleanArchitecture.WebApi": {
-    "note": "**Topic:** ကိုးဒ် စနစ်တည်ဆောက်ပုံ \n**Pattern:** အခြေခံ ကိုးဒ် ဖွဲ့စည်းပုံ \n**Principles:** \n- Separation of Concerns (SoC) - တစ်ခုတည်းသော တာဝန်ကို တည်ဆောက်ခြင်း \n- အမည်ပေးခြင်း (Naming) - ရှင်းလင်းစွာ အမည်ပေးခြင်း \n- အမှား လက်ခံခြင်း (Error Handling) - အမှားများကို လက်ခံခြင်း \n**Example code:** \n```csharp\npublic class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>\nprivate readonly IEnumerable<IValidator<TRequest>> _validators;\n```\n**Lesson:** ကိုးဒ် တည်ဆောက်ရာတွင် တစ်ခုတည်းသော တာဝန်ကို တည်ဆောက်ခြင်း၊ ရှင်းလင်းစွာ အမည်ပေးခြင်း၊ အမှားများကို လက်ခံခြင်း စသည်တို့ကို ဂရုပြုရမည်။ \n**Verdict:** ကိုးဒ် တည်ဆောက်ပုံ အခြေခံ လုပ်ငန်း စနစ်တည်ဆောက်ပုံ အားဖြင့် အဆင်ပြေသည်။",
-    "provider": "groq",
+    "note": "**Topic:** Role Enumeration & Exception Handling\n\n**Pattern:** Custom Exceptions & Pipeline Validation\n\n**Principles:**\n- **Single Responsibility:** `ApiException` extends `Exception` for API-specific errors.\n  ```csharp\n  public class ApiException : Exception\n  ```\n- **Error Handling:** `ValidationBehavior` throws `ValidationException` on failures.\n  ```csharp\n  throw new Exceptions.ValidationException(failures);\n  ```\n- **Separation of Concerns:** `ValidationBehavior` delegates validation to `IValidator<TRequest>`.\n  ```csharp\n  private readonly IEnumerable<IValidator<TRequest>> _validators;\n  ```\n\n**Example code:**\n```csharp\n// Roles.cs\npublic enum Roles { ... }\n\n// ApiException.cs\npublic class ApiException : Exception { ... }\n\n// ValidationBehaviour.cs\npublic class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> { ... }\n```\n\n**Lesson:** Use enums for roles, custom exceptions for API errors, and pipeline behaviors for validation.\n\n**Verdict:** Reusable patterns for role-based systems, error handling, and validation.",
+    "provider": "mistral",
     "quality": "ok",
+    "tier": "rich",
+    "source_count": 3,
     "files": [
       ".github/ISSUE_TEMPLATE/bug_report.md",
       ".github/ISSUE_TEMPLATE/feature_request.md",
@@ -34,12 +40,14 @@
       "Application/DTOs/Account/AuthenticationResponse.cs",
       "Application/DTOs/Account/ForgotPasswordRequest.cs"
     ],
-    "ts": "2026-07-18 23:48"
+    "ts": "2026-07-19 22:53"
   },
   "excellalabs/js-best-practices-workshopper": {
-    "note": "**Topic:** ကိုက်ညီများ လေ့လာခြင်း\n**Pattern:** စမ်းသပ်ခြင်း နှင့် ခွဲခြားခြင်း\n**Principles:** Separation of Concerns, Error Handling\n**Example code:** `if (regexSingleQuotes.test(fileContents)) { expect(regexDoubleQuotes.test(fileContents)).to.equal(false); }`\n**Lesson:** ကိုက်ညီများကို စမ်းသပ်ခြင်း နှင့် ခွဲခြားခြင်း အတွက် သီးခြားစီ လုပ်ငန်းများ ခွဲခြားထားရန် လိုအပ်ပါသည်။\n**Verdict:** ကိုက်ညီများ လေ့လာခြင်း နှင့် စမ်းသပ်ခြင်း အတွက် အသင်းတည်ဆောက်ပုံ ကောင်းမွန်သည်။",
-    "provider": "groq",
+    "note": "**Topic:** Testing Anti-patterns\n\n**Pattern:** Overlapping assertions\n\n**Principles:** Avoid redundant checks that test the same condition multiple times.\n\n**Example code:**\n```javascript\nexpect(regexDoubleQuotes.test(fileContents)).to.equal(false);\nexpect(regexSingleQuotes.test(fileContents)).to.equal(false);\nexpect(regexSingleQuotes.test(fileContents)).to.equal(false); // Redundant\n```\n\n**Lesson:** Each `expect` should test a unique condition. Repeating the same check adds no value and violates DRY.\n\n**Verdict:** BAD – Remove duplicate assertion.",
+    "provider": "mistral",
     "quality": "ok",
+    "tier": "rich",
+    "source_count": 3,
     "files": [
       "README.md",
       "exercises/bad_practices/exercise.js",
@@ -48,25 +56,29 @@
       "exercises/bad_practices/problem.ru.md",
       "exercises/bad_practices/solution/solution.js"
     ],
-    "ts": "2026-07-18 23:48"
+    "ts": "2026-07-19 22:53"
   },
   "lubkoKuzenko/angular-clean-code": {
-    "note": "**Topic:** ကိုက်ညီမှု စံညွှန်းများ\n**Pattern:** ကိုက်ညီမှု စံညွှန်းများ အသုံးပြုခြင်း\n**Principles:** \n- ကိုက်ညီမှု စံညွှန်းများ အသုံးပြုခြင်း (`\"noImplicitAny\": true`)\n- ကိုက်ညီမှု စံညွှန်းများ အသုံးပြုခြင်း (`\"noImplicitThis\": true`)\n- အမှားများ လက်ခံခြင်း (`\"@angular-eslint/no-input-rename\": \"error\"`)\n- အမှားများ လက်ခံခြင်း (`\"@angular-eslint/no-output-rename\": \"error\"`)\n**Example code:** \n```json\n\"noImplicitAny\": true, \n\"noImplicitThis\": true, \n\"@angular-eslint/no-input-rename\": \"error\",\n\"@angular-eslint/no-output-rename\": \"error\"\n```\n**Lesson:** ကိုက်ညီမှု စံညွှန်းများ အသုံးပြုခြင်းသည် ကုဒ်များ ရေးသားရာတွင် အရေးပါသည်။ အမှားများ လက်ခံခြင်းသည် ကုဒ်များ ရေးသားရာတွင် အရေးပါသည်။\n**Verdict:** ကိုက်ညီမှု စံညွှန်းများ အသုံးပြုခြင်းနှင့် အမှားများ လက်ခံခြင်းသည် ကုဒ်များ ရေးသားရာတွင် အရေးပါသည်။",
-    "provider": "groq",
+    "note": "⚠️ shallow (code source<2) — **Topic:** Angular Clean Code Configuration\n\n**Pattern:** Strict TypeScript & Linting Rules\n\n**Principles:**\n- **Type Safety:** `\"noImplicitAny\": true` enforces explicit types.\n- **Consistent Naming:** `@angular-eslint/directive-selector` enforces `bb` prefix + camelCase.\n- **Component/Class Naming:** `@angular-eslint/component-class-suffix` enforces suffixes like `Component`.\n- **Output Naming:** `@angular-eslint/no-output-on-prefix` bans `on`-prefixed outputs (e.g., `onClick` → `click`).\n\n**Example code:**\n```json\n\"noImplicitAny\": true,\n\"@angular-eslint/directive-selector\": [\"error\", { \"type\": \"attribute\", \"prefix\": \"bb\", \"style\": \"camelCase\" }],\n\"@angular-eslint/component-selector\": [\"error\", { \"type\": \"element\", \"prefix\": \"bb\", \"style\": \"kebab-case\" }],\n\"@angular-eslint/component-class-suffix\": \"error\",\n\"@angular-eslint/no-output-on-prefix\": \"error\"\n```\n\n**Lesson:** Enforce strict typing and naming conventions to reduce bugs and improve maintainability.\n\n**Verdict:** Strong configuration for Angular projects.",
+    "provider": "mistral",
     "quality": "ok",
+    "tier": "shallow",
+    "source_count": 0,
     "files": [
       "README.md"
     ],
-    "ts": "2026-07-18 23:49"
+    "ts": "2026-07-19 22:53"
   },
   "henki-robotics/henki_ros2_best_practices": {
-    "note": "**Topic:** Henki ROS 2 Best Practices \n**Pattern:** Documentation \n**Principles:** Separation of Concerns, Organization \n**Example code:** `## Nodes`, `## Launch files`, `## Parameters and Config Files` \n**Lesson:** ကိုဒ်ကို အမျိုးအစားခွဲခြား၍ အပိုင်းပိုင်းခြားထားခြင်းသည် ကိုဒ်ကို လွယ်ကူစွာ ရှာဖွေနှင့် မှတ်သားနိုင်စေသည်။ \n**Verdict:** ကိုဒ်အား စီစဉ်ထားခြင်းသည် အရေးပါသည်။",
-    "provider": "groq",
+    "note": "⚠️ shallow (code source<2) — **Topic:** ROS 2 Best Practices Documentation Structure\n\n**Pattern:** Hierarchical Documentation Organization\n\n**Principles:**\n- **Separation of Concerns**: Different files for different topics (e.g., `README.md` vs. `henki_ros2_best_practices.md`).\n  - *Example code:*\n    ```markdown\n    # FILE: README.md\n    # FILE: henki_ros2_best_practices.md\n    ```\n\n**Lesson:** Maintain modular documentation to avoid clutter and improve readability.\n\n**Verdict:** Follows a clear, topic-based structure for ROS 2 best practices.",
+    "provider": "mistral",
     "quality": "ok",
+    "tier": "shallow",
+    "source_count": 0,
     "files": [
       "README.md",
       "henki_ros2_best_practices.md"
     ],
-    "ts": "2026-07-18 23:49"
+    "ts": "2026-07-19 22:53"
   }
 }
