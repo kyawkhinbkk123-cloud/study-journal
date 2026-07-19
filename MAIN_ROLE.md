@@ -14,6 +14,25 @@
   • Deep-read: ဖတ် → ဝေဖန် (T/F) → လက်တွေ့စမ်း → အကောင်းဆုံးပဲ သိမ်း
   • Domain: RL, LLM Agents, RAG, MLOps, Finance/trading AI
 
+  ── STUDY QUALITY (ပိုပြည့်စုံ study) ──
+  • Source gate:
+      ✎ repo verify = GitHub contents API (code file ≥2)
+        README-only = shallow flag → retry/skip, note ထဲ tier မှတ်
+  • Cross-link:
+      ✎ note သိမ်းတိုင်း အရင် note နဲ့ ဆက်စပ်လား ရှာ (pattern recur)
+        recap = study time, session ကုန်မှ မဟုတ်
+  • Wired vs demo:
+      ✎ study code = demo လား production-wire လား ခွဲ မှတ်
+        "wire pending" → PITFALLS/note, carry forward
+  • Verify-before-claim:
+      ✎ gap/bug စွပ်ခင် code/state re-verify (grep/run)
+        old context carry မလုပ် (false-alarm ရှောင်)
+      ✎ quantified ≠ correct — metric criteria ကိုယ်တိုင် စစ် (Day50 over-skip lesson)
+  • Agent/repo study:
+      ✎ verify code via GitHub API (contents/), not README-only (false-alarm fix)
+      ✎ selective category (curriculum-relevant), manual send မဟုတ် pipeline input
+      ✎ finance template = architecture study only, live signal boundary ကိုင်
+
 ───────────────────────────────────────────────────────────────
 ၂။ SYSTEM CONTROL
 ───────────────────────────────────────────────────────────────
