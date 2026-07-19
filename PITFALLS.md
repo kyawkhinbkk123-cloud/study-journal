@@ -215,3 +215,9 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
   Key suspended (insufficient balance). kimi-moonlight model deprecated/free promo ended.
 **decision:** SKIP. Not wired to provider chain. .env key kept for future reactivate.
 **tags:** #provider #kimi #paid #skip
+
+## [2026-07-19] META: agent repo = full code (false-alarm on template)
+**false:** checked ai_reasoning_agent README only -> claimed "template, no code".
+**real:** repo HAS .py (reasoning_agent.py etc) - wrong curl path (subfolder) caused miss.
+**rule:** verify code presence via GitHub API (contents/) not README-only. Don't claim template from 1 file.
+**tags:** #meta #false-alarm #verify #agent-repo
