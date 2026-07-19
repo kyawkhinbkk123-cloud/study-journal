@@ -23,14 +23,14 @@
   • Cron ၆ ခု monitor (daily audit, overnight study)
   • Provider monitor
       ✎ list = providers.py က source of truth (ဂဏန်း မ hardcode)
-        chain: nous→groq→openrouter→mistral→cohere→nvidia(+gemini)
+        chain: nous→groq→openrouter→mistral→nvidia(+gemini)
         ─────────────────────────────────────────────
-        active (key ရှိ) : openrouter · mistral · cohere · gemini(vision) · groq
-        inactive (key မရှိ): nous
+        active (key ရှိ) : openrouter · mistral · gemini(vision) · groq · nvidia(embed)
+        inactive (key မရှိ/သေ): nous · cohere(free dead) · kimi(suspended)
         primary လက်ရှိ : groq (key fixed 2026-07-18, llama-3.3-70b, fastest)
-        buffer         : openrouter(429 risk) · mistral · cohere
+        buffer         : openrouter(429 risk, model fixed llama-3.3-70b:free 2026-07-19) · mistral
         vision:    gemini-3.1-flash-lite (verified 2026-07-18) · openrouter
-        embed:     nvidia (curl only) — text chain fallback မဟုတ်
+        embed:     nvidia (curl only) · gemini-embed-2 (3072, trading RAG) — text chain fallback မဟုတ်
 
 ───────────────────────────────────────────────────────────────
 ၃။ TRIGGER — ဘယ်အခါ (WHEN)
