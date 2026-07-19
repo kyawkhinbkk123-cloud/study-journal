@@ -86,3 +86,9 @@ C:/Users/user/AppData/Local/hermes/
   skills/ .......... workflow REUSE ....... တစ်ခုလုံး ထပ်လုပ်
   study.db ......... fact QUERY ........... note ပြန်ရှာ
 ═══════════════════════════════════════════════════════════════
+
+## [2026-07-19] TELEGRAM ROUTING (verified via screenshot)
+- @study_bot (8090957427) = Hermes Main Agent reply channel. Gateway uses .env TELEGRAM_BOT_TOKEN=809095.
+- kkk3 / kyawkk3_bot (824051) = separate chat, NOT study bot.
+- Kyaw messaging @study_bot = talking to Main Agent (CORRECT, intended). Do NOT say "wrong bot".
+- Confusion: both bots look similar in Telegram list. Study_bot chat = main agent. That is by design.
