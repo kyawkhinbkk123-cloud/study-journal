@@ -347,3 +347,10 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - fix: always restore from .env.bak (shutil.copy), never hand-type keys.
 - lesson: .env edit = read full value, or copy from backup. Never abbreviate.
 - tags: #env #corruption #recovery #mistake
+
+## [2026-07-20] VERIFY: Forex/Coding cron NOT broken
+- Earlier session said error. Live test tonight: forex_study.py exit 0 (skip done, process repos).
+- code_study.py runs (timeout=long task, not crash).
+- conclusion: premature error report (execution_success assumed broken).
+- rule: cron error = run script live + check note quality, not just assume.
+- tags: #cron #verify #false-alarm
