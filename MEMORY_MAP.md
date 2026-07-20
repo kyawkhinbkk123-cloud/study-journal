@@ -116,3 +116,10 @@ C:/Users/user/AppData/Local/hermes/
 - newsdata.io fetch_news.py = NOT written, cron NOT registered (doc only)
 - local LLM (Ollama) = NOT installed
 ⚠️ BUG FOUND: .env STUDY_BOT_TOKEN = NOT SET. telegram_bot.py uses TELEGRAM_BOT_TOKEN=824051 (kkk3) -> study_bot polls kkk3, not 809095. Fix: add STUDY_BOT_TOKEN=809095 token.
+
+## [2026-07-20] TOKEN BUG DETAIL (verified)
+- study_bot (TELEGRAM_BOT_TOKEN=824051) = polls kyawkk3_bot (kkk3 identity, NOT 809095).
+- 409 NOT yet: gateway (kkk3) = webhook (not poll) -> no conflict.
+- Effect: msg to kkk3 -> study_inbox (dual capture). Wrong routing.
+- Fix: .env STUDY_BOT_TOKEN=<809095 from BotFather>. Manual (Kyaw).
+- After fix: study_bot=@kkk4study_bot (809095) separate, kkk3=main (webhook).
