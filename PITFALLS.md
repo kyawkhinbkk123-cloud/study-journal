@@ -328,3 +328,22 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - rolling window shared -> vision calls eat embed quota -> 560-cutoff factor.
 - fix: separate key for embed if vision heavy, or schedule embed off-peak.
 - tags: #gemini #quota #vision #embed #share
+
+## [2026-07-20] FIX: .env stale GEMINI key removed
+- 2 GEMINI_API_KEY (one 401 stale, one valid). Removed stale.
+- now 1 valid key. day-48.py last-wins still safe.
+- rule: dup API keys in .env = bug source. Keep 1 valid only.
+- tags: #gemini #key #env #fix
+
+## [2026-07-20] CRITICAL: GEMINI keys BOTH 401 (2026-07-20 night)
+- Both GEMINI_API_KEY (JaZ + Lx1) return 401.
+- embed + vision (gemini) DEAD until new key.
+- impact: 524 embed blocked, 2-way analysis blocked, vision blocked.
+- fix: need fresh GEMINI_API_KEY from Kyaw (Nous portal / Google AI).
+- tags: #gemini #key #dead #blocked #critical
+
+## [2026-07-20] META: never write REDACTED into .env
+- I tried to restore key with REDACTED placeholder -> .env corrupted (3 entries junk).
+- fix: always restore from .env.bak (shutil.copy), never hand-type keys.
+- lesson: .env edit = read full value, or copy from backup. Never abbreviate.
+- tags: #env #corruption #recovery #mistake
