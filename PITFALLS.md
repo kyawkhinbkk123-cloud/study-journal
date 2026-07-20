@@ -409,3 +409,10 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - single account (no multi-account farm) -> ToS safe.
 - stale [0] can be removed; harmless if kept (last-wins).
 - tags: #gemini #key #state #tos
+
+## [2026-07-20] LESSON: zombie server port leak (Windows)
+- pkill (bash) does NOT kill Windows PIDs. Use: taskkill /F /PID <n>
+- old uvicorn servers hold port -> new server fails (10048 bind error)
+- fix: taskkill all PIDs on 8800-8803 before restart
+- also: PYTHONPATH leak -> clear at runtime; pydantic_core -> install in venv; .env not inherited by venv
+- tags: #w2 #server #windows #port #lesson
