@@ -390,3 +390,9 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - QUOTA_LIMIT=1400 (buffer under 1500). trivial-skip 1756->1159.
 - conclusion: 524 pending = real, source complete, no missing.
 - tags: #embed #repos #source #confirm
+
+## [2026-07-20] CONFIRM: .env.bak fresh + valid key[1]
+- .env.bak == .env (identical), key[1]=OK (embed safe).
+- if .env corrupts (REDACTED etc) -> shutil.copy(.env.bak, .env).
+- rule: never hand-type keys, always restore from .env.bak.
+- tags: #env #backup #restore #confirm
