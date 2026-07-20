@@ -1,7 +1,7 @@
-# vector/large db - ignore (binary bloat, 44.8MB)
-study_vectors.db
-rag_day30.db
+venv_m13/
+__pycache__/
+*.log
+provider_state.json
 llm_cache.db
-*.db
-# BUT keep study notes db (text notes, small, curriculum record)
-!study.db
+rag_day30.db
+vectors.db
