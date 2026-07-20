@@ -8,6 +8,8 @@
 ၁။ STUDY — ဘာလုပ်မလဲ (WHAT)
 ───────────────────────────────────────────────────────────────
   • ၆ လ AI curriculum (M1–M12) auto, တစ်ရက်ချင်း
+      ⚠️ AUTO = computer ON session မှ (agent backend local)
+      catch-up: computer ပိတ် ရင် ပြန်ဖွင့်မှ run (run_session last_run gap)
   • နေ့တိုင်း: code run → verify → study.db note → GitHub push → နောက်ရက်
       ✎ push scope = study_journal repo တစ်ခုတည်း
         တခြား repo ဘယ်တော့မှ auto-push မလုပ်ရ
