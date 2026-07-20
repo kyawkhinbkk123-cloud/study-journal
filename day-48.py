@@ -21,11 +21,14 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 for _cand in ["../.env", "../../.env", "C:/Users/user/AppData/Local/hermes/.env"]:
     if os.path.exists(_cand):
+        _seen = {}
         for _l in open(_cand, encoding="utf-8", errors="replace"):
             _l = _l.strip()
             if _l and not _l.startswith("#") and "=" in _l:
                 _k, _v = _l.split("=", 1)
-                os.environ.setdefault(_k.strip(), _v.strip())
+                _seen[_k.strip()] = _v.strip()  # last wins (valid key)
+        for _k, _v in _seen.items():
+            os.environ[_k] = _v
         break
 
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "").strip()

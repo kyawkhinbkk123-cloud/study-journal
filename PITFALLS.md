@@ -308,3 +308,10 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 **rule:** token conflict = SAME token polled by 2 procs. Different tokens = separate bots (safe).
 **fix:** MAIN_ROLE §5 corrected: STUDY_BOT_TOKEN stays (separate), kkk3 protected separately.
 **tags:** #telegram #token #409 #misdiagnosis #verify
+
+## [2026-07-20] META: GEMINI_API_KEY rotation (stale first key)
+- .env has 2 GEMINI_API_KEY (first=expired 401, second=valid).
+- day-48.py os.environ.setdefault kept FIRST (stale) -> 401.
+- fix: load .env last-wins (valid key).
+- rule: when .env has dup keys, last occurrence = current. setdefault = bug.
+- tags: #gemini #key #rotation #embed
