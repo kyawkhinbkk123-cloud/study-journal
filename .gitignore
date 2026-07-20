@@ -1,2 +1,7 @@
-vectors.db
+# vector/large db - ignore (binary bloat, 44.8MB)
+study_vectors.db
+rag_day30.db
 llm_cache.db
+*.db
+# BUT keep study notes db (text notes, small, curriculum record)
+!study.db
