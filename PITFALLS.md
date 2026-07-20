@@ -315,3 +315,16 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - fix: load .env last-wins (valid key).
 - rule: when .env has dup keys, last occurrence = current. setdefault = bug.
 - tags: #gemini #key #rotation #embed
+
+## [2026-07-20] META: token ID mapping drift (doc vs getMe)
+- WRONG (git 6a6fbdd): said 824051=study, 809095=gateway.
+- RIGHT (getMe live): 824051=@kyawkk3_bot (main), 809095=@kkk4study_bot.
+- root: I swapped id/bot in memory note. Never trust memory note, getMe is truth.
+- rule: token id->username mapping = getMe live ONLY, never from doc/memory.
+- tags: #telegram #token #doc-drift #verify
+
+## [2026-07-20] META: GEMINI vision+embed share quota
+- vision (gemini-3.1-flash-lite) + embed (gemini-embed-2) = SAME GEMINI_API_KEY.
+- rolling window shared -> vision calls eat embed quota -> 560-cutoff factor.
+- fix: separate key for embed if vision heavy, or schedule embed off-peak.
+- tags: #gemini #quota #vision #embed #share
