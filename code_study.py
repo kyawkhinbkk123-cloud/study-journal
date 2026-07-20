@@ -54,6 +54,11 @@ SYS_RETRY = SYS + "\n\nCRITICAL: previous answer was garbage. Quote REAL code or
 
 
 def _get(url: str) -> dict:
+    # W3 network guard: only api.github.com allowed (2-tier host-literal)
+    from urllib.parse import urlparse
+    host = urlparse(url).netloc
+    if host != "api.github.com":
+        raise PermissionError(f"blocked host: {host} (only api.github.com)")
     req = urllib.request.Request(url, headers=HEADERS)
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
