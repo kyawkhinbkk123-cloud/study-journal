@@ -123,3 +123,10 @@ C:/Users/user/AppData/Local/hermes/
 - Effect: msg to kkk3 -> study_inbox (dual capture). Wrong routing.
 - Fix: .env STUDY_BOT_TOKEN=<809095 from BotFather>. Manual (Kyaw).
 - After fix: study_bot=@kkk4study_bot (809095) separate, kkk3=main (webhook).
+
+## [2026-07-20] study bot DISABLED (direct mode)
+- User: kkk3 direct only (no study_bot middle).
+- Removed STUDY_BOT_TOKEN, killed pid 3400, lock removed.
+- Active: @kyawkk3_bot (824051) only.
+- study_inbox auto-read OFF. Manual add via kkk3 if needed.
+- data (study.db 123, journal repo) kept.
