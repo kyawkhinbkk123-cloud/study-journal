@@ -130,3 +130,12 @@ C:/Users/user/AppData/Local/hermes/
 - Active: @kyawkk3_bot (824051) only.
 - study_inbox auto-read OFF. Manual add via kkk3 if needed.
 - data (study.db 123, journal repo) kept.
+
+## [2026-07-20] ARCHITECTURE SPLIT (verified)
+- kkk3 = Hermes Cloud (Nous server). Computer off -> still talk/control OK.
+- study pipeline + cron + embed = LOCAL scripts/ (computer on only).
+- Cron: hermes agent loop (NOT schtasks). Missed = skip, no auto-catchup.
+  -> Day 38 checkpoint resume (manual re-run pending days).
+- 524 embed = (quota reset) AND (computer ON). Align or skip.
+- Cloud->Local bridge: NONE (no ngrok/tunnel/webhook). kkk3 cmd = manual.
+- User must run local tasks on computer; kkk3 = cloud chat only.
