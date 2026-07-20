@@ -383,3 +383,10 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - sample 5/429 files = 38 pending -> ~524 total (no 1084 waste).
 - resume safe: computer off mid-batch = 560 cached, re-run extends.
 - tags: #embed #resume #hash #quota
+
+## [2026-07-20] CONFIRM: repos/ 8 EA (embed source ready)
+- repos/ has 8 dirs (429 code files). Expert-Advisor-Studio=0 (no src, skip).
+- day-48 max_repos=8 -> all 8 as embed input.
+- QUOTA_LIMIT=1400 (buffer under 1500). trivial-skip 1756->1159.
+- conclusion: 524 pending = real, source complete, no missing.
+- tags: #embed #repos #source #confirm
