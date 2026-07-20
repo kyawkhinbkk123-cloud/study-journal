@@ -293,3 +293,10 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 **real:** rolling 24h window = ALL embed tasks share (Day47-51 + M12). 560 မှာ ကုန် (shared).
 **rule:** plan embed = task-total vs SHARED window, not single-task vs cap. Reset = prev+24h.
 **tags:** #gemini #embed #quota #meta #rolling
+
+## [2026-07-20] META: study_vectors.db path + git bloat
+**issue:** 2 copies (scripts/ 44.8MB main + study_journal/ stale). day-48.py uses scripts/ (correct).
+**risk:** journal/ copy = stale/partial; git binary bloat (44.8MB, no diff).
+**fix:** .gitignore study_vectors.db + rag_day30.db (keep study.db notes). git rm --cached.
+**rule:** vector/large db = OFF git. notes db = keep. Path = scripts/study_vectors.db (source of truth).
+**tags:** #git #bloat #vector #path #meta
