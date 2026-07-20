@@ -99,3 +99,20 @@ C:/Users/user/AppData/Local/hermes/
 - Two bots, clear split: kkk3 = talk, study_bot = learn.
 - Do NOT merge/delete. Both healthy (verified: kkk3 replying, study_bot polling pid 11484).
 - Gateway (kkk3) is cloud-managed; study_bot is local poll (telegram_bot.py).
+
+## [2026-07-20] SYSTEM STATUS (verified/pending/planned)
+✅ VERIFIED:
+- kkk3 (824051=@kyawkk3_bot) = main agent, replying OK
+- study_notes = 123 (id1-123)
+- groq OK, gemini-embed reset OK (3072)
+- signal REJECT (keyword, quota-free) PASS
+- study_vectors.db = scripts/ (1020 vectors, 42MB, true source)
+⏳ PENDING (reset ~မနက်):
+- 524 embed (1084 total, 560 done, shared window exhausted)
+- 2-way analysis PASS (semantic, embed လို)
+- iATR coverage (full 8-repo)
+- M12 full recap
+📝 PLANNED/NOT-DONE:
+- newsdata.io fetch_news.py = NOT written, cron NOT registered (doc only)
+- local LLM (Ollama) = NOT installed
+⚠️ BUG FOUND: .env STUDY_BOT_TOKEN = NOT SET. telegram_bot.py uses TELEGRAM_BOT_TOKEN=824051 (kkk3) -> study_bot polls kkk3, not 809095. Fix: add STUDY_BOT_TOKEN=809095 token.
