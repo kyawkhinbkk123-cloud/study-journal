@@ -396,3 +396,10 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - if .env corrupts (REDACTED etc) -> shutil.copy(.env.bak, .env).
 - rule: never hand-type keys, always restore from .env.bak.
 - tags: #env #backup #restore #confirm
+
+## [2026-07-20] CONFIRM: embed_pipeline 429-gate safe
+- wait_for_reset() returns True ONLY on 200 OK.
+- 429 -> sleep 60min retry (embed NOT called).
+- timeout -> sys.exit(1) (no partial 524 waste).
+- conclusion: reset-until-200 prevents quota burn.
+- tags: #embed #gate #429 #safe
