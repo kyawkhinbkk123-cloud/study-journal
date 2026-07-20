@@ -77,12 +77,13 @@
   ❌ Don't-touch: state.db · sessions/ · auth.json · memories/
   ❌ CONNECT PROTECTION (kkk3 never break):
       ✎ .env TELEGRAM_BOT_TOKEN (kkk3) ကို မပြင်/မဖျက် (cloud link ပျက်)
-      ✎ STUDY_BOT_TOKEN ကို မပြန်ထည့် (၂ bot conflict/409)
+      ✎ STUDY_BOT_TOKEN (809095=@kkk4study) = SEPARATE bot, conflict မဟုတ်
+         → ထည့်ထား (study_bot က ကိုယ်ပိုင် identity, kkk3 မ ရော)
       ✎ Desktop "Local gateway" မ ဖွင့် (သီးသန့် session)
       ✎ BotFather "Revoke token" မ လုပ် (reconnect လို)
       ✎ sessions.json (kkk3 session key) မ ဖျက်
       ✎ cloud→local bridge မ တည်ဆောက် (split architecture ထိန်း)
-      → kkk3 = ONLY connect channel (computer off လည်း run)
+      → kkk3 = main channel, study_bot = separate (၂ ခု သီးသန့်)
 
 ───────────────────────────────────────────────────────────────
 ၆။ ESCALATION — Kyaw ကို "ဘယ်အခါ"

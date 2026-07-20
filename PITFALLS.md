@@ -300,3 +300,11 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 **fix:** .gitignore study_vectors.db + rag_day30.db (keep study.db notes). git rm --cached.
 **rule:** vector/large db = OFF git. notes db = keep. Path = scripts/study_vectors.db (source of truth).
 **tags:** #git #bloat #vector #path #meta
+
+## [2026-07-20] META: STUDY_BOT_TOKEN = separate bot (misdiagnosis fixed)
+**wrong:** git 8b72fab said STUDY_BOT_TOKEN မထည့် (conflict) -> reversed git 6a6fbdd.
+**verify:** getMe 2 tokens -> kkk3=824051 (@kyawkk3_bot), study=809095 (@kkk4study_bot). DIFFERENT.
+**truth:** 2 distinct tokens = NO conflict, 409 impossible. study_bot needs 809095 to have own identity.
+**rule:** token conflict = SAME token polled by 2 procs. Different tokens = separate bots (safe).
+**fix:** MAIN_ROLE §5 corrected: STUDY_BOT_TOKEN stays (separate), kkk3 protected separately.
+**tags:** #telegram #token #409 #misdiagnosis #verify
