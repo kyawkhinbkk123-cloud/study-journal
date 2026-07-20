@@ -376,3 +376,10 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - live test: AQ.Ab8RN6Lx1... -> embed 200 OK (not 401).
 - conclusion: morning 524 embed WILL use valid key. No stale risk.
 - tags: #gemini #key #confirm #embed
+
+## [2026-07-20] CONFIRM: embed resume point (no full re-embed)
+- study_vectors.db = 1020 vectors (460 old EA + 560 new).
+- day-48.py: chunk_hash UNIQUE, skip if in DB -> embeds 524 pending only.
+- sample 5/429 files = 38 pending -> ~524 total (no 1084 waste).
+- resume safe: computer off mid-batch = 560 cached, re-run extends.
+- tags: #embed #resume #hash #quota
