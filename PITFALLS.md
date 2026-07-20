@@ -354,3 +354,19 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - conclusion: premature error report (execution_success assumed broken).
 - rule: cron error = run script live + check note quality, not just assume.
 - tags: #cron #verify #false-alarm
+
+## [2026-07-20] HARDEN: kkk3 3-point (cloud dependency + role drift)
+- #1 SPOF: kkk3=cloud gateway. Nous down=kconf down. No fallback (backend:local but gateway=cloud).
+- #2 memory: agent loads LOCAL MEMORY.md + sessions.json (not cloud). Cloud=gateway only.
+- #3 ROLE DRIFT: SOUL.md was MISSING -> agent used default role, not MAIN_ROLE.
+  FIXED: SOUL.md created (copy MAIN_ROLE). sync_role.py must keep SOUL.md synced.
+- rule: after MAIN_ROLE edit -> run sync_role.py (updates SOUL.md + git). Else agent drift.
+- tags: #kkk3 #cloud #spof #role-drift #harden
+
+## [2026-07-20] CRITICAL: computer-off claim WRONG
+- I claimed kkk3 (cloud) = computer off run. FALSE.
+- truth: kkk3 gateway=cloud (msg received), agent backend=LOCAL (computer on only).
+- computer OFF -> gateway up, but LOCAL agent dead -> NO reply.
+- corrected: kkk3 talk = computer ON. Cloud=message route only.
+- ARCHITECTURE.md + §1 must say computer-on (not off).
+- tags: #kkk3 #architecture #false-claim #correction

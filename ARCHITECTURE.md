@@ -1,15 +1,18 @@
 # HERMES SYSTEM ARCHITECTURE — Kyaw (verified 2026-07-20)
 
-## 【1】CONNECT FLOW (direct)
-```
+【1】CONNECT FLOW (gateway cloud, AGENT local)
+─────────────────────────────
 မင်း (Telegram app)
    → @kyawkk3_bot (824051, TELEGRAM_BOT_TOKEN)
-   → Hermes Cloud Gateway (Nous server — computer off လည်း run)
+   → Hermes Cloud Gateway (Nous server — message receive only, always up)
+   → LOCAL Hermes agent (backend: local, မင့် computer — computer ON မှ run)
    → session: agent:main:telegram:dm:8192230588
    → ကျာ် (Hermes Agent / Main Role)
-```
-- kkk3 = ONLY main channel
-- Computer ပိတ် လည်း စကားပြော/control OK
+✅ getMe: 824051 = @kyawkk3_bot (first_name: kkk3)
+⚠️ CORRECTED: computer OFF → gateway up (msg received) BUT local agent dead → NO reply.
+   kkk3 talk/control = computer ON required (agent backend local).
+   Cloud = message route only, NOT compute.
+→ kkk3 = main channel (computer on မှ)
 - **getMe live: 824051 = @kyawkk3_bot (first_name: kkk3)** ✅
 
 ## 【2】STUDY BOT (separate, poll-only)
