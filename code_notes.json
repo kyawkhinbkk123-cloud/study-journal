@@ -1,18 +1,18 @@
 {
   "kavaan/awesome-clean-code-projects-across-languages-and-framework": {
-    "note": "⚠️ shallow (code source<2) — **Topic:** Clean Architecture\n**Pattern:** Separation of Concerns, Single-Responsibility Principle\n**Principles:** \n- Separation of Concerns: ကိုဒ်များကို အမျိုးအစားခွဲခြားထားခြင်း\n- Single-Responsibility Principle: တစ်ခုတည်းသော တာဝန်ကို ထမ်းဆောင်ခြင်း\n**Example code:** \n```javascript\n// ဥပမာအားဖြင့် React + TypeScript Clean Architecture တွင် \n// entity နှင့် usecase ကို ခွဲထားခြင်း\n// entity\nexport interface UserEntity {\n  id: number;\n  name: string;\n}\n\n// usecase\nexport interface GetUserUseCase {\n  execute(): UserEntity;\n}\n```\n**Lesson:** ကိုဒ်များကို အမျိုးအစားခွဲခြားထားခြင်းအားဖြင့် ရေးသားခြင်းသည် အဆင်ပြေမှု နှင့် ထိန်းသိမ်းမှုကို လွယ်ကူစေသည်။\n**Verdict:** Clean Architecture ကို အသုံးပြုခြင်းအားဖြင့် အဆင်ပြေမှု နှင့် ထိန်းသိမ်းမှုကို လွယ်ကူစေနိုင်သည်။",
-    "provider": "groq",
+    "note": "⚠️ shallow (code source<2) — **Topic:** Clean Architecture in Frontend Frameworks\n\n**Pattern:** Layered Architecture (Domain, Application, Infrastructure, Presentation)\n\n**Principles:**\n- **Separation of Concerns**: Clear division between business logic (domain), use cases (application), external services (infrastructure), and UI (presentation).\n  - *Example code*: `src/domain`, `src/application`, `src/infrastructure`, `src/presentation` (folder structure from referenced repos)\n\n- **Dependency Rule**: Inner layers (domain) should not depend on outer layers (infrastructure).\n  - *Example code*: Domain entities (`User.ts`) never import UI or API components (from [React + TypeScript Clean Architecture](https://github.com/bespoyasov/frontend-clean-architecture))\n\n- **Single Responsibility**: Each layer/module has one reason to change.\n  - *Example code*: `UserRepository` (infrastructure) only handles data access, not business logic (from [Express.js Clean Architecture](https://github.com/panagiop/node.js-clean-architecture))\n\n**Example code:**\n```typescript\n// Domain layer (business rules)\nexport interface UserRepository {\n  findById(id: string): Promise<User | null>;\n}\n\n// Infrastructure layer (external details)\nexport class PrismaUserRepository implements UserRepository {\n  async findById(id: string): Promise<User | null> {\n    return prisma.user.findUnique({ where: { id } });\n  }\n}\n```\n\n**Lesson:** Clean Architecture isolates core logic from frameworks/libraries, enabling testability and scalability.\n\n**Verdict:** HIGH REUSABILITY for frontend/backend projects requiring maintainability.",
+    "provider": "mistral",
     "quality": "ok",
     "tier": "shallow",
     "source_count": 0,
     "files": [
       "README.md"
     ],
-    "ts": "2026-07-20 06:00"
+    "ts": "2026-07-20 23:00"
   },
   "SebastienDegodez/copilot-instructions": {
-    "note": "⚠️ shallow (code source<2) — **Topic:** ကိုက်ပိုင်းလုပ်ငန်းစီမံချက် \n**Pattern:** အလုပ်လည်ပတ်မှု စီမံချက် \n**Principles:** \n- စီမံချက် ခွဲခြားခြင်း (Separation of Concerns) \n- အမည်ပေးခြင်း (Naming) \n- စမ်းသပ်ခြင်း (Testing) \n- ချို့ယွင်းမှု စီမံချက် (Error Handling) \n- DRY (Don't Repeat Yourself) \n- တစ်ခုတည်း တာဝန် (Single-Responsibility) \n**Example code:** \n```csharp\n// စမ်းသပ်ခြင်း (Testing) \n// ဥပမာ - dotnet test ကို အသုံးပြု၍ စမ်းသပ်ခြင်း \ndotnet test \n// ချို့ယွင်းမှု စီမံချက် (Error Handling) \n// ဥပမာ - ချို့ယွင်းမှု ဖြစ်ပေါ်လျှင် အမှားကို ဖော်ပြခြင်း \nFix any compiler warnings and errors before going to the next step.\n```\n**Lesson:** ကိုက်ပိုင်းလုပ်ငန်း စီမံချက် တွင် စီမံချက် ခွဲခြားခြင်း၊ အမည်ပေးခြင်း၊ စမ်းသပ်ခြင်း၊ ချို့ယွင်းမှု စီမံချက်၊ DRY နှင့် တစ်ခုတည်း တာဝန် တို့ကို အသုံးပြုရန် လိုအပ်ပါသည်။ \n**Verdict:** ကိုက်ပိုင်းလုပ်ငန်း စီမံချက် တွင် အဆိုပါ စီမံချက် ခွဲခြားခြင်း၊ အမည်ပေးခြင်း၊ စမ်းသပ်ခြင်း၊ ချို့ယွင်းမှု စီမံချက်၊ DRY နှင့် တစ်ခုတည်း တာဝန",
-    "provider": "groq",
+    "note": "⚠️ shallow (code source<2) — **Topic:** Repository Structure & Agent Workflow Design\n\n**Pattern:** Modular Agent Architecture with Clear Responsibilities\n\n**Principles:**\n- **Separation of Concerns**: Each agent file has a distinct purpose (e.g., architect, slides-wizard).\n  - *Example code:* `agents/architect.agent.md` (focuses on planning) vs. `agents/slides-wizard.agent.md` (focuses on presentation).\n\n- **Documentation-Driven Workflow**: Instructions are explicitly listed before implementation.\n  - *Example code:* `.github/copilot-instructions.md` → `Instructions used: [minimal-api.instructions.md, domain-driven-design.instructions.md]`.\n\n- **TDD Enforcement**: Tests are prioritized before implementation.\n  - *Example code:* `.github/copilot-instructions.md` → `Follow TDD when it is possible. Always start new changes by writing new test cases`.\n\n**Example code:**\n```markdown\n# agents/architect.agent.md\n1. Gather context (e.g., `read_file`).\n2. Ask clarifying questions.\n3. Create a detailed plan (with Mermaid diagrams if needed).\n\n# .github/copilot-instructions.md\n1. List used instruction files.\n2. Run `dotnet test` or `dotnet build` to verify tests.\n```\n\n**Lesson:** Agents should have single-responsibility roles, and workflows must enforce validation (e.g., TDD, testing).\n\n**Verdict:** Well-structured for reusability; principles are explicitly codified in documentation.",
+    "provider": "mistral",
     "quality": "ok",
     "tier": "shallow",
     "source_count": 0,
@@ -24,10 +24,10 @@
       ".github/copilot-instructions.md",
       "README.md"
     ],
-    "ts": "2026-07-20 06:00"
+    "ts": "2026-07-20 23:01"
   },
   "iammukeshm/CleanArchitecture.WebApi": {
-    "note": "**Topic:** Role Enums & API Exception Handling\n\n**Pattern:** Custom Exceptions & Pipeline Validation\n\n**Principles:**\n- **Single Responsibility:** `ApiException` extends `Exception` for API-specific errors.\n  ```csharp\n  public class ApiException : Exception\n  ```\n- **Error Handling:** `ValidationBehavior` throws `ValidationException` on validation failures.\n  ```csharp\n  throw new Exceptions.ValidationException(failures);\n  ```\n- **Dependency Injection:** `ValidationBehavior` injects validators via constructor.\n  ```csharp\n  private readonly IEnumerable<IValidator<TRequest>> _validators;\n  public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)\n  ```\n\n**Example code:**\n```csharp\n// Roles.cs\npublic enum Roles { ... }\n\n// ApiException.cs\npublic class ApiException : Exception { ... }\n\n// ValidationBehaviour.cs\npublic class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> { ... }\n```\n\n**Lesson:**\n- Use enums for fixed role sets.\n- Extend `Exception` for domain-specific errors.\n- Validate requests in pipeline middleware.\n\n**Verdict:** ✅ Reusable patterns for role management and error handling.",
+    "note": "**Topic:** Role Enumeration and Exception Handling\n\n**Pattern:** Enum for Role Definitions\n\n**Principles:** Single Responsibility, Clear Naming\n- `public enum Roles` (Clear role definitions with explicit naming)\n\n**Example code:**\n```csharp\npublic enum Roles\n```\n\n**Lesson:** Use enums for fixed sets of roles to ensure type safety and readability.\n\n**Verdict:** ✅ Valid\n\n---\n\n**Topic:** Custom Exception for API Errors\n\n**Pattern:** Inheritance from `Exception`\n\n**Principles:** Error Handling, Extensibility\n- `public class ApiException : Exception`\n- `public ApiException(string message, params object[] args)` (Flexible message formatting)\n\n**Example code:**\n```csharp\npublic class ApiException : Exception\npublic ApiException() : base() { }\npublic ApiException(string message) : base(message) { }\npublic ApiException(string message, params object[] args)\n```\n\n**Lesson:** Custom exceptions improve error handling granularity and debugging.\n\n**Verdict:** ✅ Valid\n\n---\n\n**Topic:** Validation Pipeline Behavior\n\n**Pattern:** Pipeline Behavior (MediatR)\n\n**Principles:** Separation of Concerns, DRY, Error Handling\n- `public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>` (Separation via pipeline)\n- `throw new Exceptions.ValidationException(failures);` (Centralized error handling)\n\n**Example code:**\n```csharp\npublic class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>\nprivate readonly IEnumerable<IValidator<TRequest>> _validators;\npublic ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)\npublic async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)\nthrow new Exceptions.ValidationException(failures);\n```\n\n**Lesson:** Use pipeline behaviors for cross-cutting concerns like validation.\n\n**Verdict:** ✅ Valid\n\n---\n\n**Topic:** Bug Report Template\n\n**Pattern:** Structured Issue Reporting\n\n**Principles:** Clarity, Reproducibility\n- Steps 1-4 (Clear, actionable instructions)\n\n**Example code:**\n```markdown\n1. Go to '...'\n2. Click on '....'\n3. Scroll down to '....'\n4. See error\n```\n\n**Lesson:** Templates ensure consistent and actionable bug reports.\n\n**Verdict:** ✅ Valid",
     "provider": "mistral",
     "quality": "ok",
     "tier": "rich",
@@ -40,10 +40,10 @@
       "Application/DTOs/Account/AuthenticationResponse.cs",
       "Application/DTOs/Account/ForgotPasswordRequest.cs"
     ],
-    "ts": "2026-07-20 06:01"
+    "ts": "2026-07-20 23:01"
   },
   "excellalabs/js-best-practices-workshopper": {
-    "note": "**Topic:** Testing Anti-patterns\n\n**Pattern:** Overlapping assertions\n\n**Principles:** Single Responsibility Principle (SRP) - Each test should verify one specific condition.\n\n**Example code:**\n```javascript\nexpect(regexDoubleQuotes.test(fileContents)).to.equal(false);\nexpect(regexSingleQuotes.test(fileContents)).to.equal(false);\nexpect(regexComment.test(fileContents)).to.equal(false);\n```\n\n**Lesson:** Multiple assertions in a single test block violate SRP. Each `expect` should be in a separate test case to isolate failures and improve clarity.\n\n**Verdict:** BAD - Tests are coupled and unclear.",
+    "note": "**Topic:** String Quote Consistency\n\n**Pattern:** Regex Validation for Quote Types\n\n**Principles:**\n- **Single Responsibility:** Each regex checks a specific quote type.\n  `regexSingleQuotes.test(fileContents)`\n- **Testing:** Assertions verify absence of conflicting patterns.\n  `expect(regexDoubleQuotes.test(fileContents)).to.equal(false);`\n\n**Example code:**\n```javascript\nif (regexSingleQuotes.test(fileContents)) {\nexpect(regexDoubleQuotes.test(fileContents)).to.equal(false);\nexpect(regexSingleQuotes.test(fileContents)).to.equal(false);\nexpect(regexComment.test(fileContents)).to.equal(false);\n```\n\n**Lesson:** Use regex to enforce consistent string quote usage in code.\n\n**Verdict:** UNKNOWN - truncated (missing closing brace and full context).",
     "provider": "mistral",
     "quality": "ok",
     "tier": "rich",
@@ -56,7 +56,7 @@
       "exercises/bad_practices/problem.ru.md",
       "exercises/bad_practices/solution/solution.js"
     ],
-    "ts": "2026-07-20 06:01"
+    "ts": "2026-07-20 23:01"
   },
   "lubkoKuzenko/angular-clean-code": {
     "note": "⚠️ shallow (code source<2) — **Topic:** Angular Clean Code Configuration\n\n**Pattern:** TypeScript & ESLint Configuration for Angular\n\n**Principles:**\n- **Strict Type Safety:** Enforce type checking to avoid implicit `any` and `this` types.\n  - `\"noImplicitAny\": true`\n  - `\"noImplicitThis\": true`\n- **Decorator Support:** Enable experimental decorators for Angular features.\n  - `\"experimentalDecorators\": true`\n  - `\"emitDecoratorMetadata\": true`\n- **Consistent Naming Conventions:** Enforce Angular-specific naming rules (e.g., directive prefixes, component suffixes).\n  - `\"@angular-eslint/directive-selector\": [\"error\", { \"type\": \"attribute\", \"prefix\": \"bb\", \"style\": \"camelCase\" }]`\n  - `\"@angular-eslint/component-selector\": [\"error\", { \"type\": \"element\", \"prefix\": \"bb\", \"style\": \"kebab-case\" }]`\n  - `\"@angular-eslint/component-class-suffix\": \"error\"`\n- **Input/Output Naming Rules:** Prevent renaming of `@Input`/`@Output` and enforce prefixes.\n  - `\"@angular-eslint/no-input-rename\": \"error\"`\n  - `\"@angular-eslint/no-output-on-prefix\": \"error\"`\n  - `\"@angular-eslint/no-output-rename\": \"error\"`\n- **Type Definitions:** Prefer `interface` over `type` for consistency.\n  - `\"@typescript-eslint/consistent-type-definitions\": \"error\"`\n- **Member Ordering:** Enforce consistent member ordering in classes.\n  - `\"@typescript-eslint/member-ordering\": \"error\"`\n\n**Example code:**\n```json\n\"noImplicitAny\": true,\n\"noImplicitThis\": true,\n\"experimentalDecorators\": true,\n\"emitDecoratorMetadata\": true,\n\"@angular-eslint/directive-selector\": [\"error\", { \"type\": \"attribute\", \"prefix\": \"bb\", \"style\": \"camelCase\" }],\n\"@angular-eslint/component-selector\": [\"error\", { \"type\": \"element\", \"prefix\": \"bb\", \"style\": \"kebab-case\" }],\n\"@angular-eslint/component-class-suffix\": \"error\",\n\"@angular-eslint/no-input-rename\": \"error\",\n\"@angular-eslint/no-output-on-prefix\": \"error\",\n\"@angular-eslint/no-output-rename\": \"error\",\n\"@typescript-eslint/consistent-type-definitions\": \"error\",\n\"@typescript-eslint/member-ordering\": \"error\"\n```\n\n**Lesson:**\n- Use strict TypeScript and ESLint rules to enforce clean, maintainable Angular code.\n- Enforce naming conventions and structural rules to reduce ambiguity and improve readability.\n\n**Verdict:** **VALID** (Configurations are reusable for Angular projects).",
@@ -80,5 +80,73 @@
       "henki_ros2_best_practices.md"
     ],
     "ts": "2026-07-20 04:47"
+  },
+  "google_adk_crash_course": {
+    "google_adk_crash_course": {
+      "repo": "Shubhamsaboo/awesome-llm-apps",
+      "path": "ai_agent_framework_crash_course/google_adk_crash_course",
+      "tier": "rich (full .py, 13 modules)",
+      "studied": [
+        "5_memory_agent(in-memory)",
+        "8_multi_agent_researcher",
+        "9_2_loop_agent",
+        "7_plugins",
+        "4_2_function_tools(calculator)"
+      ],
+      "notes": {
+        "memory(5.1)": "InMemorySessionService+Runner+LlmAgent. Session per user_id, state=conversation_history. RAM-only, lost on restart. T: session pattern ok; F: no persistence vs our SQLite state.db; F: gemini-only vs our multi-provider.",
+        "multi_agent(8)": "research_agent(google_search)->summarizer_agent->critic_agent. Coordinator root with sub_agents+AgentTool. MATCHES our M12 trading-ai blueprint (research/summarize/critique). Lesson: role-specialization + coordinator = clean multi-agent.",
+        "loop(9.2)": "LoopAgent iterates plan_refiner + IncrementIteration(BaseAgent, state[\"iteration\"] counter). State-driven loop control. Lesson: iteration guard via session state (not infinite).",
+        "plugins(7)": "BasePlugin with on_user_message/before_agent/before_tool/after_run callbacks. Global cross-agent hooks (usage stats). Lesson: plugin layer = our skill/hook equivalent; clean observability.",
+        "function_tools(4.2)": "LlmAgent+Python fn tools (calculate_*, convert_*). Tools imported from tools.py, attached via tools=[]. Lesson: our execute_code/terminal = same pattern; typed fn tools > prompt-only.",
+        "starter(1)": "LlmAgent+instruction only. T: our MAIN_ROLE/SOUL = same.",
+        "model_agnostic(2)": "LiteLlm(openrouter/openai|anthropic). MATCHES our provider chain.",
+        "callbacks(6)": "before/after agent/model/tool. State-based. = our skill/hook+verify guard.",
+        "sequential(9.1)": "SequentialAgent pipeline. = our stepwise flow.",
+        "parallel(9.3)": "ParallelAgent concurrent, distinct state keys. = our delegate_task batch."
+      },
+      "verdict": "FULL course studied (13 modules). ADK = instruction/model-agnostic/tools/session/callbacks/plugins/sequential+loop+parallel. ALL match Hermes (persistent+multi-provider+skills). External validation.",
+      "ts": "2026-07-20T22:33:04.371657",
+      "quality": "ok",
+      "studied_full": [
+        "1_starter",
+        "2_1_openai",
+        "2_2_anthropic",
+        "3_1/3_2(README-only shallow)",
+        "4_2_function_tools",
+        "5_1_memory",
+        "6_1_lifecycle_cb",
+        "6_2_llm_cb",
+        "6_3_tool_cb",
+        "7_plugins",
+        "8_multi_agent",
+        "9_1_sequential",
+        "9_3_parallel"
+      ]
+    }
+  },
+  "backtest_frameworks_study": {
+    "name": "backtest_frameworks_study",
+    "repo": [
+      "kernc/backtesting.py",
+      "MegaJoctan/StrategyTester5",
+      "TonyMa1/walk-forward-backtester"
+    ],
+    "tier": "rich (README + architecture verified)",
+    "lessons_for_our_mt5_backtest": {
+      "cost_model": "backtesting.py uses commission=.002 + exclusive_orders. OUR backtest only has spread 40pt. ADD: commission (~/lot XAUUSD Hantec), swap, slippage.",
+      "walk_forward": "WFO = rolling window in-sample optimize + out-of-sample validate. REDUCES overfitting. OUR backtest = single static window (overfit risk). ADD: WFO split.",
+      "metrics": "WFO tracks Sharpe, returns, win rate, param stability. OUR = PF/windraw/DD only. ADD: Sharpe, expectancy stability.",
+      "mt5_native": "StrategyTester5 simulates MT5 API on real history (no live terminal needed). Could replace our copy_rates manual sim. OPTION."
+    },
+    "verdict": "Our mt5_backtest.py is functional but NAIVE (spread-only, single window). Industry standard = commission+swap+slippage + walk-forward + Sharpe. Upgrade needed before GO LIVE.",
+    "ts": "2026-07-20T22:51:14.179688",
+    "quality": "ok",
+    "notes_extra": {
+      "vectorbt": "Vectorized (NumPy+Numba), grid search = seconds. OUR loop-based = slow. Lesson: for param sweep use vectorized.",
+      "backtrader": "Industry standard, event-driven, commission/sizer built-in. OUR manual sim = ok but less robust."
+    },
+    "v2_result": "WFO: in-sample PF=1.11 (win) BUT out-of-sample PF=0.61 Sharpe=-3.66 (loss). CONCLUSION: strategy overfits; DO NOT GO LIVE.",
+    "v3_result": "BARS=20000(~208d). REV: IS PF=1.30 -> OOS PF=0.80 OVERFIT. TREND: IS PF=0.92 -> OOS PF=0.80 OVERFIT. Both fail OOS. CONCLUSION: no valid edge on XAUUSD M15 with these strats."
   }
 }
