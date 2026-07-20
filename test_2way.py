@@ -20,9 +20,9 @@ os.environ.update(seen)
 
 KEY = os.environ.get("GEMINI_API_KEY", "")
 EMBED_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2-preview:embedContent?key=" + KEY
-DB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "study_vectors.db")
+DB = "C:/Users/user/AppData/Local/hermes/scripts/study_vectors.db"
 
-SIGNAL_RE = __import__("re").compile(r"\b(buy now|sell now|အခု ဝယ်|အခု ရောင်း|open position|signal)\b", __import__("re").I)
+SIGNAL_RE = __import__("re").compile(r"(buy now|sell now|အခု ဝယ်|အခု ရောင်း|open position|signal)", __import__("re").I)
 
 def embed(text):
     payload = json.dumps({"content": {"parts": [{"text": text}]}}).encode()
