@@ -139,3 +139,9 @@ C:/Users/user/AppData/Local/hermes/
 - 524 embed = (quota reset) AND (computer ON). Align or skip.
 - Cloud->Local bridge: NONE (no ngrok/tunnel/webhook). kkk3 cmd = manual.
 - User must run local tasks on computer; kkk3 = cloud chat only.
+
+## [2026-07-20] STUDY BOT LIVE TEST PASSED
+- STUDY_BOT_TOKEN=809095 (@kkk4study_bot) re-added + verified.
+- Live: user msg test -> getUpdates OK (study_bot only).
+- kkk3 (824051) separate, no cross-contamination.
+- study_bot = poll only; run_session via cron -> study_inbox.
