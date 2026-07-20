@@ -403,3 +403,9 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - timeout -> sys.exit(1) (no partial 524 waste).
 - conclusion: reset-until-200 prevents quota burn.
 - tags: #embed #gate #429 #safe
+
+## [2026-07-20] GEMINI key state (post-rotation)
+- [0] old=401 stale (inactive), [1] new=200 OK (active, last-wins picks).
+- single account (no multi-account farm) -> ToS safe.
+- stale [0] can be removed; harmless if kept (last-wins).
+- tags: #gemini #key #state #tos
