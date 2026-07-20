@@ -287,3 +287,9 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 **✅** before push: diff scripts/ vs study_journal/ code_notes.json. If study_journal ALREADY has tonight's valid notes (quality:ok) — SKIP push, report. Only push when study_journal is genuinely behind (missing repos / stale / garbage).
 **why:** ROLE precedence = correctness > automation, survivability > progress. Don't regress good notes for a redundant copy.
 **tags:** #push #code_study #dedup #overwrite #cron
+
+## [2026-07-20] META: gemini-embed = ROLLING SHARED window (not daily cap)
+**false:** single task 1084 < 1500 daily cap -> 1 batch ရမယ် ထင်။
+**real:** rolling 24h window = ALL embed tasks share (Day47-51 + M12). 560 မှာ ကုန် (shared).
+**rule:** plan embed = task-total vs SHARED window, not single-task vs cap. Reset = prev+24h.
+**tags:** #gemini #embed #quota #meta #rolling
