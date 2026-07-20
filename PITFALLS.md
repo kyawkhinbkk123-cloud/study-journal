@@ -370,3 +370,9 @@ Day 51: sample skipped chunks -> OVER-SKIP found -> smart-skip (name/keyword) ->
 - corrected: kkk3 talk = computer ON. Cloud=message route only.
 - ARCHITECTURE.md + §1 must say computer-on (not off).
 - tags: #kkk3 #architecture #false-claim #correction
+
+## [2026-07-20] CONFIRM: GEMINI key[1] picked (embed safe)
+- providers.py: os.environ.get(GEMINI_API_KEY), .env last-wins = key[1] valid.
+- live test: AQ.Ab8RN6Lx1... -> embed 200 OK (not 401).
+- conclusion: morning 524 embed WILL use valid key. No stale risk.
+- tags: #gemini #key #confirm #embed
